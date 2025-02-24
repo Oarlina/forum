@@ -12,7 +12,7 @@ class Autoloader{
 		//$class = Model\Managers\TopicManager (FullyQualifiedClassName)
 		//namespace = Model\Managers, nom de la classe = TopicManager
 
-		// on explose notre variable $class par \
+		// on explose notre variable $class par, (principalement pour mac)
 		$parts = preg_split('#\\\#', $class);
 		//$parts = ['Model', 'Managers', 'TopicManager']
 

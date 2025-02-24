@@ -18,8 +18,11 @@
                 <h3 class="message" style="color: green"><?= App\Session::getFlash("success") ?></h3>
                 <header>
                     <nav>
-                        <a href="/">Sunstar</a>
-                        <div id="nav-left">
+                        <div class="logo_title"> <!-- ceci est le logo du forum et son nom-->
+                            <img src="public/img/logo.png" alt="Logo" class="logo_header">
+                            <a href="/" class="title">Sunstar</a>
+                        </div>
+                        <div class="left_nav"> <!-- ceci est la future barre de recherche -->
                             <div class="search">
                                 <p>Search...</p>
                                 <i class="fa-solid fa-magnifying-glass"></i>
@@ -30,19 +33,26 @@
                                 <a href="index.php?ctrl=home&action=users">Voir la liste des gens</a>
                             <?php } ?>
                         </div>
-                        <div id="nav-right">
+                        <div class="right_nav"> <!-- ici c'est soit les boutons se connecter/ s'inscrire soit le compte et le bouton se déconnecter -->
                         <?php
                             // si l'utilisateur est connecté 
                             if(App\Session::getUser()){
                                 ?>
                                 <a href="index.php?ctrl=security&action=profile"><span class="fas fa-user"></span>&nbsp;<?= App\Session::getUser()?></a>
-                                <a href="index.php?ctrl=security&action=logout">Déconnexion</a>
+                                <i class="fa-solid fa-user"></i>
+                                <div class="button_conexion_inscritption">
+                                    <a href="index.php?ctrl=security&action=logout">Déconnexion</a>
+                                </div>
                                 <?php
                             }
                             else{
                                 ?>
-                                <a href="index.php?ctrl=security&action=login">Connexion</a>
-                                <a href="index.php?ctrl=security&action=register">Inscription</a>
+                                <div class="button_conexion_inscritption">
+                                    <a href="index.php?ctrl=security&action=login">Connexion</a>
+                                </div>
+                                <div class="button_conexion_inscritption">
+                                    <a href="index.php?ctrl=security&action=register">Inscription</a>
+                                </div>
                             <?php
                             }
                         ?>
@@ -56,23 +66,23 @@
             </div>
 
             <footer>
-                <section class="footer_haut">
-                    <a href="#">Règlement du forum</a>
-                    <a href="#">Mentions légales</a>
-                    <a href="#">Mentions légales</a>
-                    <a href="#">Mentions légales</a>
+                <section class="top_footer"> <!-- les mentions légales -->
+                    <a href="#">Politique de confidentialité</a>
+                    <a href="#">Cookies</a>
+                    <a href="#">Nous soutenir</a>
+                    <a href="#">Contact</a>
                 </section>
-                <hr id="ligne_footer">
-                <section class="footer_bas">
+                <hr class="ligne_footer">
+                <section class="bottom_footer"> <!-- la partie ou se trouve les reseaux sociaux + le peid de page qui dit l'année de creation du site -->
                     <p>Suivez-nous </p>
                     <div class="reseaux">
-                        <i class=" fa-brands fa-instagram"></i>
-                        <i class=" fa-brands fa-facebook"></i>
-                        <i class=" fa-brands fa-twitter"></i>
-                        <i class=" fa-brands fa-snaochat"></i>
+                        <a href="https://www.instagram.com/" target="_blank"><i class=" fa-brands fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/" target="_blank"><i class=" fa-brands fa-facebook-f"></i></a>
+                        <a href="https://www.x.com/" target="_blank"><i class=" fa-brands fa-x-twitter"></i></a>
+                        <a href="https://www.snapchat.com/" target="_blank"><i class=" fa-brands fa-snapchat"></i></a>
                     </div>
+                    <small>&copy; <?= date_create("now")->format("Y") ?> - Sunstar</small>
                 </section>
-                <p>&copy; <?= date_create("now")->format("Y") ?> - </p>
             </footer>
         </div>
         <script

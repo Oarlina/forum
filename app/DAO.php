@@ -13,7 +13,7 @@ namespace App;
 abstract class DAO{
 
     private static $host   = 'mysql:host=127.0.0.1;port=3306';
-    private static $dbname = 'forummvc_v2';
+    private static $dbname = 'forum_marquant'; // nom de la base de donnée
     private static $dbuser = 'root';
     private static $dbpass = '';
 
@@ -32,7 +32,7 @@ abstract class DAO{
                 \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'",
                 \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
                 \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC
-            )   
+            )   // on défini l'encodage puis on active le mode erreur en exeption et enfin 
         );
     }
 
