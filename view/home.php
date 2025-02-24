@@ -1,8 +1,27 @@
-<h1>BIENVENUE SUR LE FORUM</h1>
+<div class="home_box">
+    <div class="left_box">
+        <div class="forum">
+            <h3>Forum</h3>
+            <p>Retrouvez-ici toutes les infos du forum et accéder directement à la FAQ pour éclaircir vos doutes.</p>
+        </div>
+        <div class="reading">
+            <h3>Lecture</h3>
+            <p>Plongez dans ce bloc pour explorer une variété de genres de lecture et trouver celui qui vous passionne le plus.</p>
+        </div>
+    </div>
+    <div class="community">
+        <h3>Communauté</h3>
+        <p>Accédez ici à la communauté du forum et restez informé sur tous les évènements à venir.</p>
+    </div>
+    <div class="right_box">
+        <div class="blibliostar">
+            <h3>Blibliostar</h3>
+            <p>Elle permet de parcourir l'ensemble des ouvrages et d'explorer leur contenu.</p>
+        </div>
+        <div class="account">
+            <h3>Compte</h3>
+            <p>Retrouvez ici votre compte avec vos lectures et discussions.</p>
+        </div>
+    </div>
 
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit ut nemo quia voluptas numquam, itaque ipsa soluta ratione eum temporibus aliquid, facere rerum in laborum debitis labore aliquam ullam cumque.</p>
-
-<p>
-    <a href="index.php?ctrl=security&action=login">Se connecter</a>
-    <a href="index.php?ctrl=security&action=register">S'inscrire</a>
-</p>
+</div>

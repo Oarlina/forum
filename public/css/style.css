@@ -106,5 +106,70 @@ body{
 
 /* CSS des autres pages*/
 body{
+    width: 100%;
     
+    .home_box{
+        margin: 10px auto;
+        height: 27rem;
+        width: 80%;
+        display: flex;
+        flex-direction: row;
+        text-align: center;
+        .left_box, .right_box{
+            width: 30%;
+            height: 100%;
+            .forum, .account, .reading, .blibliostar {
+                margin: 10px;
+                border-radius: 15%;
+                width: 95%;
+                height: 48%;
+                
+            }
+            .forum, .account{
+                background: url('../img/home/rose.png'), #ffb3c0;
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center;
+
+            }
+            .reading, .blibliostar{
+                background: url('../img/home/jaune.png'), #fffbb2;
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center;
+            }
+        }
+        /* pour pouvoir tourner le background-image*/
+        .community::before{
+            content: "";
+            display: block;
+            height: 100%;
+            width: 100%;
+            background-image: url('../img/home/bleu.png');
+            background-size: cover;
+            background-position: center;
+            border-radius: 0 0 15% 0; /* en bas a droite, en bas a gauche, en haut a gauche, en haut a droite*/
+            transform: rotate(180deg);
+        }
+        .community{
+            margin: 10px 20px;
+            border-radius: 15%;
+            width: 36%;
+            height: 98%;
+            background-color: #B3E9FF;
+            
+        }
+        /* on agis sur toutes les cases qui deviendront des liens*/
+        .community, .left_box .forum, .left_box .reading, .right_box .blibliostar, .right_box .account{
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+            p, h3{
+                padding: 10px;
+            }
+            h3{
+                padding-left: 15px;
+            }
+        }
+    }
 }
