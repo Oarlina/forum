@@ -11,7 +11,7 @@ use App\Entity;
 final class Category extends Entity{
 
     private $id;
-    private $name;
+    private $typeCategory;
 
     // chaque entité aura le même constructeur grâce à la méthode hydrate (issue de App\Entity)
     public function __construct($data){         
@@ -41,8 +41,8 @@ final class Category extends Entity{
     /**
      * Get the value of name
      */ 
-    public function getName(){
-        return $this->name;
+    public function getTypeCategory(){
+        return $this->typeCategory;
     }
 
     /**
@@ -50,12 +50,12 @@ final class Category extends Entity{
      *
      * @return  self
      */ 
-    public function setName($name){
-        $this->name = $name;
+    public function setTypeCategory($typeCategory){
+        $this->typeCategory = $typeCategory;
         return $this;
     }
 
-    public function __toString(){
-        return $this->name;
+    public function __toString():string {
+        return $this->typeCategory;
     }
 }

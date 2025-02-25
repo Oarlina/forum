@@ -13,4 +13,17 @@ class CategoryManager extends Manager{
     public function __construct(){
         parent::connect();
     }
+
+    // récupérer tous les topics d'une catégorie spécifique (par son id)
+    public function findCategory() {
+
+        $sql = "SELECT * FROM ".$this->tableName." t";
+       
+        // la requête renvoie plusieurs enregistrements --> getMultipleResults
+        return  $this->getMultipleResults(
+            DAO::select($sql), 
+            $this->className
+        );
+    }
+    
 }

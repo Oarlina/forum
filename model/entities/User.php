@@ -37,8 +37,8 @@ final class User extends Entity{
     /**
      * Get the value of nickName
      */ 
-    public function getNickName(){
-        return $this->nickName;
+    public function getPseudo(){
+        return $this->pseudo;
     }
 
     /**
@@ -46,13 +46,13 @@ final class User extends Entity{
      *
      * @return  self
      */ 
-    public function setNickName($nickName){
-        $this->nickName = $nickName;
+    public function setPseudo($pseudo){
+        $this->pseudo = $pseudo;
 
         return $this;
     }
 
     public function __toString() {
-        return $this->nickName;
+        return $this->pseudo;
     }
 }
