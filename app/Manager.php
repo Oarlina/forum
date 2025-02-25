@@ -33,7 +33,7 @@ abstract class Manager{
 
         $sql = "SELECT *
                 FROM ".$this->tableName." a
-                WHERE a.id_".$this->tableName." = :id
+                WHERE id_".ucfirst($this->tableName)." = :id
                 ";
 
         return $this->getOneOrNullResult(

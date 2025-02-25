@@ -10,23 +10,22 @@ use App\Entity;
 
 final class Topic extends Entity{
 
-    private $idTopic;
+    private $id;
     private $title;
-    private $userId;
-    private $category;
+    private $user;
+    private $isLock;
     private $creationDate;
-    private $closed;
+    private $category_id;
 
     public function __construct($data){         
         $this->hydrate($data);        
     }
 
-    
-    public function getIdTopic(){
-        return $this->idTopic;
+    public function getId(){
+        return $this->id;
     }
-    public function setId($idTopic){
-        $this->id = $idTopic;
+    public function setId($id){
+        $this->id = $id;
         return $this;
     }
 
@@ -38,21 +37,44 @@ final class Topic extends Entity{
         return $this;
     }
     
-    public function getUserId(){
-        return $this->userId;
+    public function getUser(){
+        return $this->user;
     }
-    public function setUserId($userId){
-        $this->userId = $userId;
+    public function setUser($user){
+        $this->user = $user;
         return $this;
     }
     
-    public function getCategory(){
-        return $this->category;
+    public function getCategory_id(){
+        return $this->category_id;
     }
-    public function setCategory($category){
-        $this->category = $category;
+    public function setCategory_id($category_id){
+        $this->category_id = $category_id;
         return $this;
     }
+    
+    public function getCreationDate()
+    {
+        return $this->creationDate;
+    }
+    public function setCreationDate($creationDate)
+    {
+        $this->creationDate = $creationDate;
+
+        return $this;
+    }
+
+    public function getIsLock()
+    {
+        return $this->isLock;
+    }
+    public function setIsLock($isLock)
+    {
+        $this->isLock = $isLock;
+
+        return $this;
+    }
+
 
     public function __toString(){
         return $this->title;

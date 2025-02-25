@@ -17,10 +17,7 @@ class TopicManager extends Manager{
     // récupérer tous les topics d'une catégorie spécifique (par son id)
     public function findTopicsByCategory($id) {
 
-        $sql = "SELECT * FROM ".$this->tableName." t 
-                INNER JOIN category c ON t.categoryId = c.idCategory
-                INNER JOIN user u ON t.userId = u.idUser 
-                WHERE t.categoryId = :id";
+        $sql = "SELECT * FROM ".$this->tableName." t WHERE t.category_id = :id";
        
         // la requête renvoie plusieurs enregistrements --> getMultipleResults
         return  $this->getMultipleResults(
