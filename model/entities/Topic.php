@@ -10,7 +10,7 @@ use App\Entity;
 
 final class Topic extends Entity{
 
-    private $id;
+    private $idTopic;
     private $title;
     private $userId;
     private $category;
@@ -22,11 +22,11 @@ final class Topic extends Entity{
     }
 
     
-    public function getId(){
-        return $this->id;
+    public function getIdTopic(){
+        return $this->idTopic;
     }
-    public function setId($id){
-        $this->id = $id;
+    public function setId($idTopic){
+        $this->id = $idTopic;
         return $this;
     }
 
