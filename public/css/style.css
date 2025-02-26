@@ -269,4 +269,18 @@ body{
             padding: 10px;
         }
     }
+
+    .blibliostar{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+        .book{
+            margin: 10px;
+            width: 300px;
+            height: 400px;
+            text-align: center;
+        }
+    }
 }

@@ -19,8 +19,10 @@
     </div>
     <div class="right_box">
         <div class="blibliostar">
-            <h3>Blibliostar</h3>
-            <p>Elle permet de parcourir l'ensemble des ouvrages et d'explorer leur contenu.</p>
+            <a href="index.php?ctrl=forum&action=blibliostar">
+                <h3>Blibliostar</h3>
+                <p>Elle permet de parcourir l'ensemble des ouvrages et d'explorer leur contenu.</p>
+            </a>
         </div>
         <div class="account">
             <a href="index.php?ctrl=forum&action=user_account&id=4">

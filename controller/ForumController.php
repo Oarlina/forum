@@ -8,6 +8,7 @@ use Model\Managers\CategoryManager;
 use Model\Managers\TopicManager;
 use Model\Managers\UserManager;
 use Model\Managers\postManager;
+use Model\Managers\BookManager;
 
 class ForumController extends AbstractController implements ControllerInterface{
 
@@ -79,7 +80,18 @@ class ForumController extends AbstractController implements ControllerInterface{
             ]
         ];
     }
-    
+
+    public function blibliostar (){
+        $bookManager = new bookManager;
+        $books = $bookManager->findAll();
+        return [
+            "view" => VIEW_DIR."blibliostar/blibliostar.php",
+            "meta_description" => "Blibliostar : ",
+            "data" => [
+                "books"=> $books
+            ]
+        ];
+    }
     
 
 }
