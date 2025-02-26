@@ -260,7 +260,6 @@ body{
         width: 100%;
         display: flex;
         flex-direction: row;
-        background-color: #faccd3;
         .left{
             width: 10%;
             margin: 5px;
