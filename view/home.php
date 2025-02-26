@@ -1,7 +1,7 @@
 <div class="home_box">
     <div class="left_box">
         <div class="forum">
-            <a href="index.php?ctrl=forum&action=listPosts">
+            <a href="index.php?ctrl=forum&action=Forum_rule">
                 <h3>Forum</h3>
                 <p>Retrouvez-ici toutes les infos du forum et accéder directement à la FAQ pour éclaircir vos doutes.</p>
             </a>

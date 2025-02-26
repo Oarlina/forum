@@ -80,4 +80,16 @@ class ForumController extends AbstractController implements ControllerInterface{
         ];
     }
     
+    public function forum_rule (){
+        
+
+        return [
+            "view" => VIEW_DIR."Forum_rule/forum_rule.php",
+            "meta_description" => "Compte : ",
+            "data" => [
+                
+            ]
+        ];
+    }
+
 }
