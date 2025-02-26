@@ -255,4 +255,19 @@ body{
             background-color: #f6f6f6;
         }
     }
+
+    .charte{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        background-color: #faccd3;
+        .left{
+            width: 10%;
+            margin: 5px;
+        }
+        .right{
+            width: 85%;
+            padding: 10px;
+        }
+    }
 }
