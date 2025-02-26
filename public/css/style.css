@@ -12,6 +12,7 @@ h1 {
 }
 /* CSS du layout */
 body{
+    width: 100%;
     /* pour les ancres*/
     a{
         color: black;
@@ -20,6 +21,9 @@ body{
     /* quand on passe sur un ancre*/
     a:hover{
         color: #3700ff;
+    }
+    .oldpath{
+        color: blue;
     }
     nav{
         height: 5vh;
@@ -102,11 +106,6 @@ body{
             }
         }
     }
-}
-
-/* CSS des autres pages*/
-body{
-    width: 100%;
     
     .home_box{
         margin: 10px auto;
@@ -171,6 +170,89 @@ body{
             h3{
                 padding-left: 15px;
             }
+        }
+    }
+
+    .listCategories{
+        display: flex;
+        flex-direction: row;
+        .left{
+            margin: 15px;
+            height: fit-content;
+            width: fit-content;
+            padding: 1rem;
+            background-color: rgb(230, 230, 230);
+        }
+        .right{
+            width: 80%;
+            height: fit-content;
+        }
+    }
+
+    .listPosts{
+        .left{
+            width: 100%;
+            .onePost{
+                width: 100%;
+                background-color: #faccd3;
+                margin: 10px;
+                .date{
+                     font-size: small;
+                }
+                .i::before{
+                    height: 30px;
+                    width: 30px;
+                }
+                i{
+                    height: 30px;
+                    width: 30px;
+                }
+                img{
+                    height: 25px;
+                }
+            }
+        }
+    }
+
+    .user_account{
+        height: 78vh;
+        display: flex;
+        flex-direction: row;
+        .left{
+            margin: 10px;
+            padding: 5px;
+            width: 10%;
+            height: fit-content;
+            background-color: #f6f6f6;
+            img{
+                border-radius: 50%;
+                object-fit: cover; /* permet de mettre l'image dans un bloc sans changer ses dimensions*/
+                width: 180px;
+                height: 180px;
+            }
+            h2{
+                text-align: center;
+            }
+            hr{
+                margin: 10px 0;
+            }
+        }
+        .right{
+            width: 90%;
+            height: fit-content;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            img{
+                border-radius: 50%;
+                object-fit: cover; /* permet de mettre l'image dans un bloc sans changer ses dimensions*/
+                width: 180px;
+                height: 180px;
+            }
+            button{
+                width: fit-content
+            }
+            background-color: #f6f6f6;
         }
     }
 }

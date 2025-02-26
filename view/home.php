@@ -23,8 +23,10 @@
             <p>Elle permet de parcourir l'ensemble des ouvrages et d'explorer leur contenu.</p>
         </div>
         <div class="account">
-            <h3>Compte</h3>
-            <p>Retrouvez ici votre compte avec vos lectures et discussions.</p>
+            <a href="index.php?ctrl=forum&action=user_account&id=4">
+                <h3>Compte</h3>
+                <p>Retrouvez ici votre compte avec vos lectures et discussions.</p>
+            </a>
         </div>
     </div>
 
