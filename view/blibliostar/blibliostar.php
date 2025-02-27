@@ -8,7 +8,7 @@
 <section class="blibliostar">
     <?php foreach ($books as $book){ ?>
         <div class="book">
-            <img src="" alt="couverture de <?= $book->getTitle()?>">
+            <img src="public/img/books/<?= str_replace(" ", "", $book->getTitle())?>.<?= image_type_to_extension()?>" alt="couverture de <?= $book->getTitle()?>">
             <p><?= $book->getTitle()?></p>
             <p><?= $book->getAuthor()?></p>
         </div>

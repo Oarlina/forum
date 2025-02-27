@@ -15,8 +15,8 @@ final class post extends Entity{
     private $pseudo;
     private $datePost;
     private $textPost;
-    private $user_id;
-    private $topic_id;
+    private $user;
+    private $topic;
 
     // chaque entité aura le même constructeur grâce à la méthode hydrate (issue de App\Entity)
     public function __construct($data){         
@@ -65,24 +65,24 @@ final class post extends Entity{
         return $this;
     }
 
-    public function getUser_id()
+    public function getUser()
     {
-        return $this->user_id;
+        return $this->user;
     }
-    public function setUser_id($user_id)
+    public function setUser($user)
     {
-        $this->user_id = $user_id;
+        $this->user = $user;
 
         return $this;
     }
 
-    public function getTopic_id()
+    public function getTopic()
     {
-        return $this->topic_id;
+        return $this->topic;
     }
-    public function setTopic_id($topic_id)
+    public function setTopic($topic)
     {
-        $this->topic_id = $topic_id;
+        $this->topic = $topic;
 
         return $this;
     }

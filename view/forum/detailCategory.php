@@ -7,12 +7,12 @@
 
 <section class="detailCategory">
 
-    <h1>Topics pour <?= $category?></h1>
-
+    <h1>Topics pour <?= $category?> :</h1>
+    <a href="index.php?ctrl=form&action=topic"><b>Ajouter un topic dans <?= $category ?> </b></a>
     <?php
     foreach($topics as $topic ){  
         ?>
-        <p><a href="#"><?= $topic ?></a> par <?= $topic->getUser()->getPseudo() ?></p>
+        <p><a href="index.php?ctrl=forum&action=post&id=<?= $topic->getId()?>"><?= $topic->getTitle() ?></a> par <?= $topic->getUser()->getPseudo() ?></p>
         <?php }
 
 

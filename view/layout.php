@@ -19,8 +19,10 @@
                 <header>
                     <nav>
                         <div class="logo_title"> <!-- ceci est le logo du forum et son nom-->
-                            <img src="public/img/logo.png" alt="Logo" class="logo_header">
-                            <img src="public/img/logo_nom.png" alt="Sunstar">
+                            <a href="index.php">
+                                <img src="public/img/logo.png" alt="Logo" class="logo_header">
+                                <img src="public/img/logo_nom.png" alt="Sunstar">
+                            </a>
                         </div>
                         <div class="left_nav"> <!-- ceci est la future barre de recherche -->
                             <div class="search">

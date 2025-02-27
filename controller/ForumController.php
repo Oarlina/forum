@@ -67,6 +67,22 @@ class ForumController extends AbstractController implements ControllerInterface{
             ]
         ];
     }
+    
+    public function post ($id){
+        $postManager = new postManager();
+        $post = $postManager->findOneById($id);
+        $topicManager = new TopicManager();
+        $topics = $topicManager->findAll();
+
+        return [
+            "view" => VIEW_DIR."forum/post.php",
+            "meta_description" => "Compte : ",
+            "data" => [
+                "post" => $post,
+                "topics" => $topics
+            ]
+        ];
+    }
 
     public function user_account ($id){
         $userManager = new userManager();

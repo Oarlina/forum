@@ -15,7 +15,7 @@ final class Topic extends Entity{
     private $user;
     private $isLock;
     private $creationDate;
-    private $category_id;
+    private $category;
 
     public function __construct($data){         
         $this->hydrate($data);        
@@ -45,11 +45,11 @@ final class Topic extends Entity{
         return $this;
     }
     
-    public function getCategory_id(){
-        return $this->category_id;
+    public function getCategory(){
+        return $this->category;
     }
-    public function setCategory_id($category_id){
-        $this->category_id = $category_id;
+    public function setCategory($category){
+        $this->category = $category;
         return $this;
     }
     
@@ -75,8 +75,7 @@ final class Topic extends Entity{
         return $this;
     }
 
-
-    public function __toString(){
+    public function __toString():string{
         return $this->title;
     }
 }

@@ -1,4 +1,4 @@
-<p><a href="index.php" class="oldpath"> Acceuil</a> > <a href="index.php?ctrl=forum&action=forum_rule" class="oldpath">Forum</a> > Tutos</p>
+<p><a href="index.php" class="oldpath"> Acceuil</a> > <a href="index.php?ctrl=rule&action=forum_rule" class="oldpath">Forum</a> > Tutos</p>
 
 <section class="tutos">
     <div class="po">Index des tutos</div>
