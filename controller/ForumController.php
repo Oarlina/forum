@@ -72,7 +72,7 @@ class ForumController extends AbstractController implements ControllerInterface{
         $postManager = new postManager();
         $post = $postManager->findOneById($id);
         $topicManager = new TopicManager();
-        $topics = $topicManager->findAll();
+        $topics = $topicManager->findOneById($id);
 
         return [
             "view" => VIEW_DIR."forum/post.php",

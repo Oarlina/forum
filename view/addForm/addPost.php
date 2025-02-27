@@ -1,5 +1,8 @@
+<?php
+    $topic = $result["data"]["topic"];
+?>
 <section class="add">
-    <form action="index.php?ctrl=form&action=addPost" method="POST">
+    <form action="index.php?ctrl=form&action=addPost&id=<?= $topic->getId() ?>" method="POST">
         <?php
         //if(App\Session::getUser()){
             // si l'utilisateur est connecter

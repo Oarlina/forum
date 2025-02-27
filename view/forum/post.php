@@ -1,7 +1,7 @@
 <?php
     $post = $result["data"]["post"];
     $topics = $result["data"]["topics"];
-    // var_dump($post->getUser());
+    var_dump($topics->getId());
 ?>
 <p>
     <a href="index.php" class="oldpath"> Acceuil</a> 
@@ -17,7 +17,7 @@
         <p><?=$post->getUser()->getPseudo()?></p>
         <p><?= $post->getDatePost()?></p>
 
-        <a href="index.php?ctrl=form&action=post"><i class="fa-solid fa-message"></i></a>
+        <a href="index.php?ctrl=form&action=post&id=<?= $topics->getId() ?>"><i class="fa-solid fa-message"></i></a>
         <img src="public/img/heart-message.png" alt="heart message">
     </div>
     

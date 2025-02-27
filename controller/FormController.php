@@ -12,25 +12,31 @@ use Model\Managers\BookManager;
 
 class FormController extends AbstractController implements ControllerInterface{
 
-    public function post(){
+    public function post($id){
+        $topicManager = new TopicManager();
+        $topic = $topicManager->findOneById($id);
         return [
             "view" => VIEW_DIR."addForm/addPost.php",
             "meta_description" => "Formulaire de post : ",
             "data" => [
+                "topic" => $topic
             ]
         ];
     }
 
-    public function addPost(){
+    public function addPost($id){
         if (isset($_POST['submit'])) // si on a cliquer sur le bouton
         {
-            $text = filter_input(INPUT_POST,"text",FILTER_SANITIZE_SPECIAL_CHARS);
-            var_dump($text);
-            if ($text){
+            $textPost = filter_input(INPUT_POST,"text",FILTER_SANITIZE_SPECIAL_CHARS);
+            $topicManager = new TopicManager();
+            $topics = $topicManager->findOneById($id);
+            var_dump($topics->getId());
+            if ($textPost ){
                 $postManager = new PostManager();
                 $postManager->add([
-                    "text" => $text,
-                    "user_id" => 1
+                    "textPost" => $textPost,
+                    "user_id" => 1,
+                    "topic_id" => $topics->getId()
                 ]);
             }
 
