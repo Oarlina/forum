@@ -44,7 +44,7 @@ class ForumController extends AbstractController implements ControllerInterface{
         $topics = $topicManager->findTopicsByCategory($id);
 
         return [
-            "view" => VIEW_DIR."forum/detailCategory.php",
+            "view" => VIEW_DIR."forum/listTopicsByCategory.php",
             "meta_description" => "Liste des topics par catégorie : ".$category,
             "data" => [
                 "category" => $category,
@@ -69,11 +69,11 @@ class ForumController extends AbstractController implements ControllerInterface{
         ];
     }
     // il affiche un seul post
-    public function postsByTopics ($id){
+    public function postsByTopics ($idTopic){
         $postManager = new postManager();
-        $posts = $postManager->findAll();
+        $posts = $postManager->findPostsByTopic($idTopic);
         $topicManager = new TopicManager();
-        $topic = $topicManager->findOneById($id);
+        $topic = $topicManager->findOneById($idTopic);
 
         return [
             "view" => VIEW_DIR."forum/postsByTopics.php",

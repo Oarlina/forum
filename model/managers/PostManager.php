@@ -16,15 +16,17 @@ class PostManager extends Manager{
 
     // récupére tous les posts
     public function findPosts() {
-
         $sql = "SELECT * FROM ".$this->tableName." p";
        
         //  la requête renvoie plusieurs enregistrements --> getMultipleResults
-        return  $this->getMultipleResults(
-            DAO::select($sql), 
-            $this->className
-        );
+        return  $this->getMultipleResults(DAO::select($sql), $this->className);
     }
-    
+
+    public function findPostsByTopic ($idTopic){
+        $sql = "SELECT * FROM post WHERE topic_id =". $idTopic;
+
+        return $this->getMultipleResults(DAO::select($sql), $this->className);
+    }
+
     
 }

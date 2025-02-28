@@ -12,7 +12,8 @@ use Model\Managers\BookManager;
 
 class FormController extends AbstractController implements ControllerInterface{
 
-    public function post($id){
+    // m'envoie sur la page du formulaire
+    public function postForm($id){
         $topicManager = new TopicManager();
         $topic = $topicManager->findOneById($id);
         return [
@@ -24,8 +25,8 @@ class FormController extends AbstractController implements ControllerInterface{
         ];
     }
 
-
-    public function addPost($id){
+    // m'ajoute le formulaire dans la base de donnée
+    public function addPostBDD($id){
 
         if (isset($_POST['submit'])) // si on a cliquer sur le bouton
         {
@@ -42,21 +43,8 @@ class FormController extends AbstractController implements ControllerInterface{
                     "topic_id" => $topic->getId()
                 ]);
             }
-            $posts = $postManager->findAll();
-            
-            $userManager = new userManager();
-            $users = $userManager->findAll();
-            
-            // return [
-            //     "view" => VIEW_DIR."forum/listPosts.php",
-            //     "meta_description" => "Formulaire de topic : ",
-            //     "data" => [
-            //         'posts'=> $posts,
-            //         'users' => $users
-            //         ]
-            //     ]->  
-            $this->redirectTo ("forum","index","");
-            // header("Location:view/forum/listPosts.php");exit;
+            // sert a rediriger vers la page d'un topic
+            $this->redirectTo ("forum","postsByTopics", $topic->getId());
         }else{
             die("Erreur : tous les champs sont requis.");
         }

@@ -1,7 +1,6 @@
 <?php
     $posts = $result["data"]["posts"];
     $topic = $result["data"]["topic"];
-    var_dump($topic->getTitle());
 ?>
 <p>
     <a href="index.php" class="oldpath"> Acceuil</a> 
@@ -18,7 +17,7 @@
         <p><?=$post->getUser()->getPseudo()?></p>
         <p><?= $post->getDatePost()?></p>
 
-        <a href="index.php?ctrl=form&action=post&id=<?= $topic->getId() ?>"><i class="fa-solid fa-message"></i></a>
+        <a href="index.php?ctrl=form&action=postForm&id=<?= $topic->getId() ?>"><i class="fa-solid fa-message"></i></a>
         <img src="public/img/heart-message.png" alt="heart message" class="heartMessage">
     </div>
     <?php } ?>
