@@ -12,6 +12,7 @@ use Model\Managers\BookManager;
 
 class ForumController extends AbstractController implements ControllerInterface{
 
+    // il affiche les topics DE TOUTE les catégorie
     public function index() {
         
         // créer une nouvelle instance de CategoryManager
@@ -19,22 +20,22 @@ class ForumController extends AbstractController implements ControllerInterface{
         // récupérer la liste de toutes les catégories grâce à la méthode findAll de Manager.php (triés par nom)
         $categories = $categoryManager->findAll();
         // le controller communique avec la vue "listCategories" (view) pour lui envoyer la liste des catégories (data)
-        $postManager = new postManager();
-        $posts = $postManager->findAll();
+        $topicsManager = new TopicManager();
+        $topics = $topicsManager->findAll();
         $userManager = new userManager();
         $users = $userManager->findAll();
         return [
-            "view" => VIEW_DIR."forum/listCategories.php",
+            "view" => VIEW_DIR."forum/listTopics.php",
             "meta_description" => "Liste des catégories du forum",
             "data" => [
                 "categories" => $categories,
-                "posts" => $posts,
+                "topics" => $topics,
                 "users" => $users
             ]
         ];
     }
 
-
+    // affiche les topics pour UNE catégorie
     public function listTopicsByCategory($id) {
     
         $topicManager = new TopicManager();
@@ -67,19 +68,19 @@ class ForumController extends AbstractController implements ControllerInterface{
             ]
         ];
     }
-    
-    public function post ($id){
+    // il affiche un seul post
+    public function postsByTopics ($id){
         $postManager = new postManager();
-        $post = $postManager->findOneById($id);
+        $posts = $postManager->findAll();
         $topicManager = new TopicManager();
-        $topics = $topicManager->findOneById($id);
+        $topic = $topicManager->findOneById($id);
 
         return [
-            "view" => VIEW_DIR."forum/post.php",
+            "view" => VIEW_DIR."forum/postsByTopics.php",
             "meta_description" => "Compte : ",
             "data" => [
-                "post" => $post,
-                "topics" => $topics
+                "posts" => $posts,
+                "topic" => $topic
             ]
         ];
     }

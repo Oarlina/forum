@@ -12,7 +12,7 @@
             <p class="date"><?= $post->getDatePost() ?></p>
             <p><?= $post->getTextPost() ?></p>
             <i class="fa-solid fa-message"></i>
-            <img src="public/img/heart-message.png" alt="heart message">
+            <img src="public/img/heart-message.png" alt="heart message" class="heartMessage">
         </div>
         <?php } ?>
     </div>

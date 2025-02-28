@@ -25,6 +25,10 @@ body{
     .oldpath{
         color: blue;
     }
+    .heartMessage{
+        height: 16px;
+        width: 16px;
+    }
     nav{
         height: 5vh;
         width: 100%;
@@ -169,7 +173,7 @@ body{
         }
     }
 
-    .listCategories{
+    .listTopics{
         display: flex;
         flex-direction: row;
         .left{
