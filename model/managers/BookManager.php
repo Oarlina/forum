@@ -14,4 +14,8 @@ class BookManager extends Manager{
         parent::connect();
     }
 
+    public function lastInsert() {
+        $sql = "SELECT MAX(id_book) FROM ".$this->tableName;
+        return  DAO::select($sql);
+    }
 }
