@@ -11,6 +11,7 @@
         ?>
         <p><a href="index.php?ctrl=forum&action=listTopicsByCategory&id=<?= $category->getId()?>"><?= $category->getTypeCategory() ?></a></p>
         <?php } ?>
+        <a href="index.php?ctrl=form&action=addCategoryForm"><button>Ajouter une catégorie</button></a>
     </div>
 
     <div class="right">

@@ -77,23 +77,22 @@ class FormController extends AbstractController implements ControllerInterface{
         $edition = filter_input(INPUT_POST,"edition",FILTER_SANITIZE_SPECIAL_CHARS);
         $releaseDate = filter_input(INPUT_POST,"releaseDate",FILTER_SANITIZE_SPECIAL_CHARS);
         $summary = filter_input(INPUT_POST,"summary",FILTER_SANITIZE_SPECIAL_CHARS);
-        $numberPage = filter_input(INPUT_POST,"numberPage",FILTER_VALIDATE_INT);    
+        $numberPage = filter_input(INPUT_POST,"numberPage",FILTER_VALIDATE_INT);
         
         if (isset($_POST['submit'])) // si on a cliquer sur le bouton
         {
-                $bookManager = new bookManager();
-                // pour gagner des lignes afin d'ajouter
-                $data = [
-                    "title" => $title,
-                    "author" => $author,
-                    "edition" => $edition,
-                    "releaseDate" => $releaseDate,
-                    "summary" => $summary,
-                    "numberPage" => $numberPage
-                ];
-
-                $bookManager->add($data);
-            }
+            $bookManager = new bookManager();
+            // pour gagner des lignes afin d'ajouter
+            $data = [
+                "title" => $title,
+                "author" => $author,
+                "edition" => $edition,
+                "releaseDate" => $releaseDate,
+                "summary" => $summary,
+                "numberPage" => $numberPage
+            ];
+            $bookManager->add($data);
+        }
         // sert a rediriger vers la page d'un topic
         $this->redirectTo ("forum","index",);
     }
@@ -127,10 +126,9 @@ class FormController extends AbstractController implements ControllerInterface{
         if (isset($_POST['submit'])) // si on a cliquer sur le bouton
         {
             $bookManager = new bookManager();
-            // $categories = new categoryManager();
-            // $categories = $categories->categoryPick();
 
-            // pour gagner des lignes afin d'ajouter
+            // pour gagner des lignes afin d'ajouter les éléments
+            // je fais un foreach pour la posibilité d'un livre avec plusieurs genres (il ne compte pas le submit dans le $_POST)
             foreach($_POST as $pos){
                 if ($pos != "submit"){
                 $data = ["category_id" => $pos,
@@ -139,15 +137,39 @@ class FormController extends AbstractController implements ControllerInterface{
                 $CategoryBookManager->add($data);
                 }
             }
-            // $data = [
-            //     "book_id" => $id_book,
-            //     "category_id"=> $categories
-                
-            // ];
+            // sert a rediriger vers la page d'un topic
+            $this->redirectTo ("forum","blibliostar",);
+        }
 
-            // $bookManager->add($data);
-        // sert a rediriger vers la page d'un topic
-        $this->redirectTo ("forum","blibliostar",);
     }
 
-    }}
+    public function addCategoryForm (){
+        return [
+            "view" => VIEW_DIR."addForm/addCategory.php",
+            "meta_description" => "Formulaire de catégorie : ",
+            "data" => []
+        ];
+    }
+
+    public function addCategoryBDD(){
+        $CategoryManager = new CategoryManager();
+        $categories = $CategoryManager->findAll(); 
+        if (isset($_POST['submit'])) // si on a cliquer sur le bouton
+        {
+            $isExisting = false;
+            // pour gagner des lignes afin d'ajouter les éléments
+            foreach ($categories as $category){
+                if ($category->getTypeCategory() != $_POST['category'] && $isExisting==false){
+                    $data = ["typeCategory" => $_POST['category']];
+                }else {
+                    $isExisting=true;
+                }
+            }if ($isExisting ==false){
+                $CategoryManager->add($data);
+            }
+            // sert a rediriger vers la page d'un topic
+            $this->redirectTo ("forum","index",);
+        }
+    }
+
+}
