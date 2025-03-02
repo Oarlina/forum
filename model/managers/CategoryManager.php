@@ -37,5 +37,13 @@ class CategoryManager extends Manager{
             $this->className
         );
     }
+
+    public function categoryById ($id){
+        $sql= "SELECT  * FROM ". $this->tableName. ' WHERE id_category = '.$id;
+        return $sql;
+    }
     
+
+
+
 }

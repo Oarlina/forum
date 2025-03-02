@@ -19,5 +19,15 @@ class BookManager extends Manager{
         return  DAO::select($sql);
     }
 
+    public function findBookByTopics ($id){
+        $sql = "SELECT * FROM ".$this->tableName." t
+                WHERE gender = ". $id;
+       
+        // la requête renvoie plusieurs enregistrements --> getMultipleResults
+        return  $this->getMultipleResults(
+            DAO::select($sql), 
+            $this->className
+        );
+    }
     
 }

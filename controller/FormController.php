@@ -53,11 +53,17 @@ class FormController extends AbstractController implements ControllerInterface{
 
     }
     
-    public function topic(){
+    public function topicForm($id){
+        $categoryManager = new categoryManager();
+        $id = $categoryManager->categoryById($id);
+        $bookManager = new bookManager();
+        $books = $bookManager->findBookByTopics($id);
         return [
             "view" => VIEW_DIR."addForm/addTopic.php",
             "meta_description" => "Formulaire de topic : ",
-            "data" => []
+            "data" => [
+                "books" => $books
+            ]
         ];
     }
 

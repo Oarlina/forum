@@ -4,10 +4,10 @@
         //if(App\Session::getUser()){
             // si l'utilisateur est connecter
         ?>
-            <label for="">Entrer le titre du topic :</label> <br>
-            <input type="text" class="title"> </input> <br>
-            <label for="">Entrer votre réponse : </label> <br>
-            <textarea name="text"></textarea> <br>
+            <label for="">Choissisiez le livre du post</label>
+            <?php foreach( $books as $book){ ?>
+            <select name="" id=""><?= $book->getTitle() ?></select>
+            <?php } ?>
             <button value="submit">Valider </button> <br>
             <?php //}else{ ?>
             <!-- <p>Veuillez vous connecter.</p> -->
