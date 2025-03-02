@@ -9,6 +9,7 @@ use Model\Managers\TopicManager;
 use Model\Managers\UserManager;
 use Model\Managers\postManager;
 use Model\Managers\BookManager;
+use Model\Managers\CategoryBookManager;
 
 class FormController extends AbstractController implements ControllerInterface{
 
@@ -118,24 +119,35 @@ class FormController extends AbstractController implements ControllerInterface{
     public function addCategoryBookBDD($id_book){
         
         $categoryManager = new CategoryManager();
+        $CategoryBookManager = new CategoryBookManager();
         $categories = $categoryManager->findAll(); 
         
+        var_dump($_POST);
+        var_dump($id_book);
         if (isset($_POST['submit'])) // si on a cliquer sur le bouton
         {
             $bookManager = new bookManager();
-            // pour gagner des lignes afin d'ajouter
-            $data = [
-                "title" => $title,
-                "author" => $author,
-                "edition" => $edition,
-                "releaseDate" => $releaseDate,
-                "summary" => $summary,
-                "numberPage" => $numberPage
-            ];
+            // $categories = new categoryManager();
+            // $categories = $categories->categoryPick();
 
-            $bookManager->add($data);
+            // pour gagner des lignes afin d'ajouter
+            foreach($_POST as $pos){
+                if ($pos != "submit"){
+                $data = ["category_id" => $pos,
+                        "book_id"=> $id_book];
+                var_dump($data);
+                $CategoryBookManager->add($data);
+                }
+            }
+            // $data = [
+            //     "book_id" => $id_book,
+            //     "category_id"=> $categories
+                
+            // ];
+
+            // $bookManager->add($data);
         // sert a rediriger vers la page d'un topic
-        $this->redirectTo ("forum","index",);
+        $this->redirectTo ("forum","blibliostar",);
     }
 
-}
+    }}

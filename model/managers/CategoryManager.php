@@ -25,5 +25,17 @@ class CategoryManager extends Manager{
             $this->className
         );
     }
+
+    // récupérer tous les topics d'une catégorie spécifique (par son id)
+    public function categoryPick() {
+
+        $sql = "SELECT * FROM ".$this->tableName." t ";
+       
+        // la requête renvoie plusieurs enregistrements --> getMultipleResults
+        return  $this->getMultipleResults(
+            DAO::select($sql), 
+            $this->className
+        );
+    }
     
 }

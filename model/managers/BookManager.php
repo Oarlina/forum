@@ -18,4 +18,6 @@ class BookManager extends Manager{
         $sql = "SELECT MAX(id_book) FROM ".$this->tableName;
         return  DAO::select($sql);
     }
+
+    
 }

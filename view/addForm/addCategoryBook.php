@@ -11,13 +11,13 @@
             <label for="">Entrer la ou les catégories du livre : <?= $book->getTitle()?> :</label> <br>
 
             <?php foreach ($categories as $category){ ?>
-            <input type="checkbox" id="vehicle1" name="<?= $category->getTypeCategory() ?>" value="Bike">
-            <label for="vehicle1"> <?= $category->getTypeCategory() ?></label><br>
+                <label for="<?= $category->getId() ?>">
+                    <input type="checkbox" name="<?= $category->getId() ?>" value="<?= $category->getId() ?>"> <?= $category->getTypeCategory() ?>
+                </label>
             <?php } ?>
             <button value="submit" name='submit'>Valider </button> <br>
             <?php //}else{ ?>
             <!-- <p>Veuillez vous connecter.</p> -->
         <?php //} ?>
-
     </form>
 </section>
