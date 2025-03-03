@@ -32,7 +32,7 @@
         <p><?=$post->getUser()->getPseudo()?></p>
         <p><?= $post->getDatePost()?></p>
 
-        <a href="index.php?ctrl=form&action=postForm&id=<?= $topic->getId() ?>"><i class="fa-solid fa-message"></i></a>
+        <a href="index.php?ctrl=forum&action=postForm&id=<?= $topic->getId() ?>"><i class="fa-solid fa-message"></i></a>
         <img src="public/img/heart-message.png" alt="heart message" class="heartMessage">
     </div>
     <?php } ?>

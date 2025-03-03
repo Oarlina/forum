@@ -1,5 +1,7 @@
+<?php $categories = $result["data"]["categories"]; ?>
+
 <section class="add">
-    <form action="index.php?ctrl=form&action=CategoryBookForm" method="post">
+    <form action="index.php?ctrl=forum&action=addBookBDD" method="post">
         <?php
         //if(App\Session::getUser()){
             // si l'utilisateur est connecter
@@ -21,6 +23,15 @@
             
             <label for="">Entrer le nombre de pages du livre :</label> <br>
             <input type="number" name="numberPage" class="in"> </input> <br>
+
+
+            <label for="">Entrer la ou les catégories du livre :</label> <br>
+            <?php foreach ($categories as $category){ ?>
+                <label for="<?= $category->getId() ?>">
+                    <input type="checkbox" name="categories[]" value="<?= $category->getId() ?>"> <?= $category->getTypeCategory() ?>
+                </label>
+            <?php } ?>
+
 
             <button value="submit" name='submit' class="in">Valider </button> <br>
             <?php //}else{ ?>

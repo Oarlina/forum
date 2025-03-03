@@ -8,7 +8,7 @@
 <section class="detailCategory">
 
     <h1>Topics pour <?= $category?> :</h1>
-    <a href="index.php?ctrl=form&action=topicForm&id=<?= $category->getId()?>"><b>Ajouter un topic dans <?= $category ?> </b></a>
+    <a href="index.php?ctrl=forum&action=topicForm&id=<?= $category->getId()?>"><b>Ajouter un topic dans <?= $category ?> </b></a>
     <?php
     foreach($topics as $topic ){  
         ?>

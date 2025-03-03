@@ -103,4 +103,12 @@ abstract class DAO{
             echo $e->getMessage();
         }
     }
+
+    // la fonction recupere la pdo et cherche le dernier id ajouter
+    public static function lastInsertId()
+    {
+        return self::$bdd->lastInsertId(); // on utilise self::... pour eviter de devoir reinstanicer la connexion a la bdd
+    }
+
+
 }

@@ -2,7 +2,7 @@
 <?php
     $books = $result["data"]['books'];
 ?>
-    <a href="index.php?ctrl=form&action=bookForm"><button>Ajouter un livre</button></a>
+    <a href="index.php?ctrl=forum&action=bookForm"><button>Ajouter un livre</button></a>
     <p>Vérifier que votre livre n'est pas dans la liste</p>
 <section class="blibliostar">
     <?php foreach($books as $book){?>

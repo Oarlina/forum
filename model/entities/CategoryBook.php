@@ -8,9 +8,10 @@ use App\Entity;
     peut hériter de cette classe. En d'autres termes, une classe finale ne peut pas être utilisée comme classe parente.
 */
 
-final class Book extends Entity{
-    $category;
-    $book;
+final class CategoryBook extends Entity{
+
+    private $category;
+    private $book;
 
     // chaque entité aura le même constructeur grâce à la méthode hydrate (issue de App\Entity)
     public function __construct($data){         

@@ -5,7 +5,8 @@
     $categories = $result["data"]['categories']; 
     $topics = $result["data"]['topics']; 
     $users = $result["data"]['users'];
-    $books = $result['data']['books'];
+    // $books = $result['data']['books'];
+    
     
     
 
@@ -13,7 +14,7 @@
         ?>
         <p><a href="index.php?ctrl=forum&action=listTopicsByCategory&id=<?= $category->getId()?>"><?= $category->getTypeCategory() ?></a></p>
         <?php } ?>
-        <a href="index.php?ctrl=form&action=addCategoryForm"><button>Ajouter une catégorie</button></a>
+        <a href="index.php?ctrl=forum&action=addCategoryForm"><button>Ajouter une catégorie</button></a>
     </div>
 
     <div class="right">
@@ -21,10 +22,10 @@
         foreach($topics as $topic){
             ?>
             <div class="onePost">
-                <h2><a href="index.php?ctrl=forum&action=postsByTopics&id=<?= $topic->getId() ?>"><?= $topic->getTitle() ?></a></h2>
+                <h2><a href="index.php?ctrl=forum&action=postsByTopics&id=<?= $topic->getId() ?>"><?= $topic->getBook()->getTitle() ?>- <?= $topic->getBook()->getAuthor() ?></a></h2>
                 <p class="date"><?= $topic->getCreationDate() ?></p>
                 <p><?= $topic->getUser()->getPseudo() ?></p>
-                <a href="index.php?ctrl=forum&action=postsByTopics&id=<?= $topic->getId() ?>"><i class="fa-solid fa-message"></i></a>
+                <i class="fa-solid fa-message"><p></p></i>
                 <img src="public/img/heart-message.png" alt="heart message" class="heartMessage">
             </div>
             <?php } ?>
