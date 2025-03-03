@@ -13,7 +13,7 @@
                 <p>Editeur : <?= $book->getEdition() ?></p>
                 <p> Date de sortie : <?= $book->getReleaseDate() ?></p>
                 <p>Nombre de pages : <?= $book->getNumberPage() ?></p>
-                <p>Genre : 
+                <p>Genres : 
                     <?php foreach($categories as $category){ ?>
                         <?= $category ?>, 
                     <?php } ?>

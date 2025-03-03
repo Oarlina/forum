@@ -110,7 +110,7 @@ class ForumController extends AbstractController implements ControllerInterface{
         $bookManager = new bookManager;
         $book = $bookManager->findOneById($id_book);
         $ctManager = new CategoryBookManager;
-        $categories = $ctManager -> findCategoryByBook($id_book);
+        $categories = $ctManager->findCategoryByBook($id_book);
         return [
             "view" => VIEW_DIR."blibliostar/detailBook.php",
             "meta_description" => "Livre : ",
@@ -225,10 +225,8 @@ class ForumController extends AbstractController implements ControllerInterface{
             ];
             $book = $bookManager->add($data); // il recupere directmeent l'id grace a l'insert dans le DAO
 
-            //je rajoute ces catégories
+            //je rajoute ces catégories en parcourant les catégories et les ajoutant a la bdd
             $categoryBookManager = new CategoryBookManager();
-         
-        
             foreach ($_POST['categories'] as $category){
                 $data = [
                     "category_id" => $category,
@@ -238,7 +236,7 @@ class ForumController extends AbstractController implements ControllerInterface{
                     $categoryBookManager->add($data);
                 }
 
-
+            // je fais l'ajout d'une image dans le formulaire
 
             $check = getimagesize($_FILES["couvertureLivre"]["tmp_name"]);
             if($check !== false) {
