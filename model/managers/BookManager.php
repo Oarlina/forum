@@ -14,11 +14,6 @@ class BookManager extends Manager{
         parent::connect();
     }
 
-    // public function lastInsertId() {
-    //     $sql = "SELECT MAX(id_book) FROM ".$this->tableName;
-    //     return  DAO::select($sql);
-    // }
-
     public function findBookByTopics ($id){
         $sql = "SELECT * FROM ".$this->tableName." t
                 WHERE gender = ". $id;
@@ -29,5 +24,16 @@ class BookManager extends Manager{
             $this->className
         );
     }
-    
+
+    public function findAllBooks()
+    {
+        $sql = "SELECT * FROM ".$this->tableName." 
+                ORDER BY id_book DESC";
+       
+        // la requête renvoie plusieurs enregistrements --> getMultipleResults
+        return  $this->getMultipleResults(
+            DAO::select($sql), 
+            $this->className
+        );
+    }
 }

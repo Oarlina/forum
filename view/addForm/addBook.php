@@ -1,7 +1,7 @@
 <?php $categories = $result["data"]["categories"]; ?>
 
 <section class="add">
-    <form action="index.php?ctrl=forum&action=addBookBDD" method="post">
+    <form action="index.php?ctrl=forum&action=addBookBDD" method="post" enctype="multipart/form-data">
         <?php
         //if(App\Session::getUser()){
             // si l'utilisateur est connecter
@@ -11,6 +11,7 @@
 
             <label for="">Entrer l'auteur du livre :</label> <br>
             <input type="text" name="author" class="in"> </input> <br>
+
             <label for="">Entrer l'édition du livre :</label> <br>
             <input type="text" name="edition" class="in"> </input> <br>
 
@@ -24,6 +25,8 @@
             <label for="">Entrer le nombre de pages du livre :</label> <br>
             <input type="number" name="numberPage" class="in"> </input> <br>
 
+            <label for="">Entrer l'image de couverture du livre : </label>
+            <input type="file" name="couvertureLivre" accept="image/*">
 
             <label for="">Entrer la ou les catégories du livre :</label> <br>
             <?php foreach ($categories as $category){ ?>

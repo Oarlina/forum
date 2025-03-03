@@ -29,8 +29,8 @@ class ForumController extends AbstractController implements ControllerInterface{
         $userManager = new userManager();
         $users = $userManager->findAll();
 
-        // $bookManager = new bookManager;
-        // $books = $bookManager->findAll();
+        // $postManager = new postManager;
+        // $posts = $postManager->topicManager($topic->getId());
         return [
             "view" => VIEW_DIR."forum/listTopics.php",
             "meta_description" => "Liste des catégories du forum",
@@ -38,13 +38,13 @@ class ForumController extends AbstractController implements ControllerInterface{
                 "categories" => $categories,
                 "topics" => $topics,
                 "users" => $users,
-                // "books" => $books
+                // "posts" => $posts
             ]
         ];
     }
     public function blibliostar (){
         $bookManager = new bookManager;
-        $books = $bookManager->findAll();
+        $books = $bookManager->findAllBooks();
         return [
             "view" => VIEW_DIR."blibliostar/blibliostar.php",
             "meta_description" => "Blibliostar : ",
@@ -202,7 +202,14 @@ class ForumController extends AbstractController implements ControllerInterface{
         $summary = filter_input(INPUT_POST,"summary",FILTER_SANITIZE_SPECIAL_CHARS);
         $numberPage = filter_input(INPUT_POST,"numberPage",FILTER_VALIDATE_INT);
         $categories = filter_input(INPUT_POST,"categories", FILTER_VALIDATE_INT); // va devenir un tableau car je peux avoir plusieurs categories
-        
+
+        // je fais l'enregistrement de la page de couverture du livre
+        $target_dir = "public/img/books/"; // le fichier sera enregistrer ici
+        $target_file = $target_dir . basename($_FILES['couvertureLivre']['name']); // donne le chemin ou il va etre enregistrer
+        $uploadOk = 1; // a 1 si le fichier est télcharger sinon 0
+        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION)); // recupere l'extension de l'image
+
+
         if (isset($_POST['submit'])) // si on a cliquer sur le bouton
         {
             $bookManager = new bookManager();
@@ -230,7 +237,40 @@ class ForumController extends AbstractController implements ControllerInterface{
                     // var_dump($data);
                     $categoryBookManager->add($data);
                 }
-            
+
+
+
+            $check = getimagesize($_FILES["couvertureLivre"]["tmp_name"]);
+            if($check !== false) {
+                echo "File is an image - " . $check["mime"] . ".";
+                $uploadOk = 1;
+              } else {
+                echo "File is not an image.";
+                $uploadOk = 0;
+              }
+               // Vérifie si le fichier existe déjà
+            if (file_exists($target_file)) {
+                echo "Désolé, le fichier existe déjà";
+                $uploadOk = 0;
+            }
+                  // Vérifie la taille du fichier
+           if ($_FILES["couvertureLivre"]["size"] > 500000) {
+                echo "Désolé, votre fichier est trop volumineux.";
+                $uploadOk = 0;
+            }
+              // Chemin temporaire où le fichier est stocké après l'upload
+            // move_uploaded_file -> déplace le fichier temporaire vers le dossier définitif
+           if (move_uploaded_file($_FILES["couvertureLivre"]["tmp_name"], $target_file)) {
+            echo "Le fichier " . (basename($_FILES["couvertureLivre"]["name"])) . " a été uploadé avec succès.";
+        } else {
+            die("Erreur lors de l'upload du fichier.");
+        }
+
+
+
+
+
+
         }
         // sert a rediriger vers la page d'un topic
         $this->redirectTo ("forum","blibliostar",);
