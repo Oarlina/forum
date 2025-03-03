@@ -5,6 +5,8 @@
     $categories = $result["data"]['categories']; 
     $topics = $result["data"]['topics']; 
     $users = $result["data"]['users'];
+    $books = $result['data']['books'];
+    
     
 
     foreach($categories as $category){

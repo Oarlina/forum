@@ -16,6 +16,7 @@ final class Topic extends Entity{
     private $isLock;
     private $creationDate;
     private $category;
+    private $book;
 
     public function __construct($data){         
         $this->hydrate($data);        
@@ -74,8 +75,28 @@ final class Topic extends Entity{
 
         return $this;
     }
+    /**
+     * Get the value of book
+     */ 
+    public function getBook()
+    {
+        return $this->book;
+    }
+
+    /**
+     * Set the value of book
+     *
+     * @return  self
+     */ 
+    public function setBook($book)
+    {
+        $this->book = $book;
+
+        return $this;
+    }
 
     public function __toString():string{
         return $this->title;
     }
+
 }

@@ -24,13 +24,16 @@ class ForumController extends AbstractController implements ControllerInterface{
         $topics = $topicsManager->findAll();
         $userManager = new userManager();
         $users = $userManager->findAll();
+        $bookManager = new bookManager;
+        $books = $bookManager->findAll();
         return [
             "view" => VIEW_DIR."forum/listTopics.php",
             "meta_description" => "Liste des catégories du forum",
             "data" => [
                 "categories" => $categories,
                 "topics" => $topics,
-                "users" => $users
+                "users" => $users,
+                "books" => $books
             ]
         ];
     }
@@ -74,13 +77,15 @@ class ForumController extends AbstractController implements ControllerInterface{
         $posts = $postManager->findPostsByTopic($idTopic);
         $topicManager = new TopicManager();
         $topic = $topicManager->findOneById($idTopic);
-
+        $bookManager = new bookManager;
+        $book = $bookManager->findoneById($topic->getBook()->getId());
         return [
             "view" => VIEW_DIR."forum/postsByTopics.php",
             "meta_description" => "Compte : ",
             "data" => [
                 "posts" => $posts,
-                "topic" => $topic
+                "topic" => $topic,
+                "book" => $book
             ]
         ];
     }
@@ -106,6 +111,18 @@ class ForumController extends AbstractController implements ControllerInterface{
             "meta_description" => "Blibliostar : ",
             "data" => [
                 "books"=> $books
+            ]
+        ];
+    }
+
+    public function OneBook($id_book){
+        $bookManager = new bookManager;
+        $book = $bookManager->findOneById($id_book);
+        return [
+            "view" => VIEW_DIR."blibliostar/book.php",
+            "meta_description" => "Livre : ",
+            "data" => [
+                "book"=> $book
             ]
         ];
     }

@@ -296,6 +296,36 @@ body{
         }
     }
 
+    .book{
+        justify-items: center;/* pour centrer la div a l'interieur*/
+        width: 100%;
+        .oneBook{
+            width: 90%;
+            height: fit-content;
+            background-color: #B3E9FF;
+            margin: 25px;
+            .title{
+                font-size: larger;
+                margin: 5px 10px;
+            }
+            .under{
+                display: flex;
+                flex-direction: row;
+                width: 100%;
+                img{
+                    width: 24%;
+                    height: fit-content;
+                }
+                .right{
+                    width: 75%;
+                    p{
+                        width: 100%;
+                        height: fit-content;
+                    }
+                }
+            }
+        }
+    }
 
     /*------------------------------- Les formulaires --------------------------------*/
 

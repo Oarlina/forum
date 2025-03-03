@@ -7,9 +7,10 @@
 <section class="blibliostar">
     <?php foreach($books as $book){?>
         <div class="book">
-            <p><?=$book->getTitle()?></p>
-            <p><?= $book->getAuthor()?></p>
-
+            <a href="index.php?ctrl=forum&action=OneBook&id=<?= $book->getId()?>">
+                <p><?=$book->getTitle()?></p>
+                <p><?= $book->getAuthor()?></p>
+            </a>
         </div>
 
     <?php } ?>
