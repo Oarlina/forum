@@ -195,80 +195,86 @@ class ForumController extends AbstractController implements ControllerInterface{
     // m'ajoute le formulaire dans la base de donnée
     public function addBookBDD(){
         // je recupere les données du formulaire
-        $title = filter_input(INPUT_POST,"title",FILTER_SANITIZE_SPECIAL_CHARS);
-        $author = filter_input(INPUT_POST,"author",FILTER_SANITIZE_SPECIAL_CHARS);
-        $edition = filter_input(INPUT_POST,"edition",FILTER_SANITIZE_SPECIAL_CHARS);
-        $releaseDate = filter_input(INPUT_POST,"releaseDate",FILTER_SANITIZE_SPECIAL_CHARS);
-        $summary = filter_input(INPUT_POST,"summary",FILTER_SANITIZE_SPECIAL_CHARS);
-        $numberPage = filter_input(INPUT_POST,"numberPage",FILTER_VALIDATE_INT);
-        $categories = filter_input(INPUT_POST,"categories", FILTER_VALIDATE_INT); // va devenir un tableau car je peux avoir plusieurs categories
-
-        // je fais l'enregistrement de la page de couverture du livre
-        $target_dir = "public/img/books/"; // le fichier sera enregistrer ici
-        $target_file = $target_dir . basename($_FILES['couvertureLivre']['name']); // donne le chemin ou il va etre enregistrer
-        $uploadOk = 1; // a 1 si le fichier est télcharger sinon 0
-        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION)); // recupere l'extension de l'image
-
-
         if (isset($_POST['submit'])) // si on a cliquer sur le bouton
         {
+            $title = filter_input(INPUT_POST,"title",FILTER_SANITIZE_SPECIAL_CHARS);
+            $author = filter_input(INPUT_POST,"author",FILTER_SANITIZE_SPECIAL_CHARS);
+            $edition = filter_input(INPUT_POST,"edition",FILTER_SANITIZE_SPECIAL_CHARS);
+            $releaseDate = filter_input(INPUT_POST,"releaseDate",FILTER_SANITIZE_SPECIAL_CHARS);
+            $summary = filter_input(INPUT_POST,"summary",FILTER_SANITIZE_SPECIAL_CHARS);
+            $numberPage = filter_input(INPUT_POST,"numberPage",FILTER_VALIDATE_INT);
+            $categories = filter_input(INPUT_POST,"categories", FILTER_VALIDATE_INT); // va devenir un tableau car je peux avoir plusieurs categories
+    
+            // je fais l'enregistrement de la page de couverture du livre
+            $target_dir = "public/uploads/"; // le fichier sera enregistrer ici
+            $target_file = $target_dir . basename($_FILES['couvertureLivre']['name']); // donne le chemin ou il va etre enregistrer
+            $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION)); // recupere l'extension de l'image (on le fait en premier car si ce n'est pas une )
+            $uploadOk = 1; // a 1 si le fichier est télcharger sinon 0
+            // var_dump( rename( $target_dir.basename($_FILES['couvertureLivre']['name']), $target_dir.uniqid().'.'.$imageFileType, $target_file ) );
+            // var_dump( move_upload_dir_file($_FILES["couvertureLivre"]["tmp_name"] ,str_replace( $target_dir.basename($_FILES['couvertureLivre']['tmp_name']), $target_dir.uniqid().'.'.$imageFileType, $target_file  ) ));
             $bookManager = new bookManager();
-            // pour gagner des lignes afin d'ajouter
-            // je rajoute le livre
-            $data = [
-                "title" => $title,
-                "author" => $author,
-                "edition" => $edition,
-                "releaseDate" => $releaseDate,
-                "summary" => $summary,
-                "numberPage" => $numberPage
-            ];
-            $book = $bookManager->add($data); // il recupere directmeent l'id grace a l'insert dans le DAO
-
-            //je rajoute ces catégories en parcourant les catégories et les ajoutant a la bdd
-            $categoryBookManager = new CategoryBookManager();
-            foreach ($_POST['categories'] as $category){
                 $data = [
-                    "category_id" => $category,
-                    "book_id"=> $book];
+                    "title" => $title,
+                    "author" => $author,
+                    "edition" => $edition,
+                    "releaseDate" => $releaseDate,
+                    "summary" => $summary,
+                    "numberPage" => $numberPage
+                ];
+                $book = $bookManager->add($data); // il recupere directmeent l'id grace a l'insert dans le DAO
+                if ($book != null){ // je verifie que le livre a ete ajouter
+                    //je rajoute ces catégories en parcourant les catégories et les ajoutant a la bdd
+                    $categoryBookManager = new CategoryBookManager();
+                    if ($_POST['categories'] != null){
+                        foreach ($_POST['categories'] as $category){ // j'ajoute la ou les categories du livre
+                            $data = [
+                                "category_id" => $category,
+                                "book_id"=> $book
+                            ];
+                                $categoryBookManager->add($data);
+                            }
+                            if ($_FILES["couvertureLivre"]["tmp_name"] != null){ // on verifie que l'image a ete upload
+                                $check = getimagesize($_FILES["couvertureLivre"]["tmp_name"]); // je recupere la taille de l'image
+                                if($check !== false) { 
+                                    echo "File is an image - " . $check["mime"] . ".";
+                                    $uploadOk = 1;
+                                  } else {
+                                    echo "File is not an image.";
+                                    $uploadOk = 0;
+                                  }
+                                   // Vérifie si le fichier existe déjà
+                                if (file_exists($target_file)) {
+                                    echo "Désolé, le fichier existe déjà";
+                                    $uploadOk = 0;
+                                }
+                                      // Vérifie la taille du fichier (elle doit etre de maximum 5mega)
+                               if ($_FILES["couvertureLivre"]["size"] > 500000) {
+                                    echo "Désolé, votre fichier est trop volumineux.";
+                                    $uploadOk = 0;
+                                }
+                                // Allow certain file formats
+                                if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+                                && $imageFileType != "gif" ) {
+                                echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+                                $uploadOk = 0;
+                                }
                     
-                    // var_dump($data);
-                    $categoryBookManager->add($data);
+                                // Chemin temporaire où le fichier est stocké après l'upload
+                                // move_uploaded_file -> déplace le fichier temporaire vers le dossier définitif
+                               if (move_uploaded_file($_FILES["couvertureLivre"]["tmp_name"], $target_file)) {
+                                echo "Le fichier " . (basename($_FILES["couvertureLivre"]["name"])) . " a été uploadé avec succès.";
+                                } else {
+                                    die("Erreur lors de l'upload du fichier.");
+                                }
+                            }else {
+                                Session::addFlash("error", "Veuillez upload une image.");
+                            }
+                    }else {
+                        Session::addFlash("error", "Veuillez donner les catégories du livre.");
+                    }
+                }else{
+                    Session::addFlash("error", "Veuillez remplir les informations du livre");
                 }
-
-            // je fais l'ajout d'une image dans le formulaire
-
-            $check = getimagesize($_FILES["couvertureLivre"]["tmp_name"]);
-            if($check !== false) {
-                echo "File is an image - " . $check["mime"] . ".";
-                $uploadOk = 1;
-              } else {
-                echo "File is not an image.";
-                $uploadOk = 0;
-              }
-               // Vérifie si le fichier existe déjà
-            if (file_exists($target_file)) {
-                echo "Désolé, le fichier existe déjà";
-                $uploadOk = 0;
-            }
-                  // Vérifie la taille du fichier
-           if ($_FILES["couvertureLivre"]["size"] > 500000) {
-                echo "Désolé, votre fichier est trop volumineux.";
-                $uploadOk = 0;
-            }
-              // Chemin temporaire où le fichier est stocké après l'upload
-            // move_uploaded_file -> déplace le fichier temporaire vers le dossier définitif
-           if (move_uploaded_file($_FILES["couvertureLivre"]["tmp_name"], $target_file)) {
-            echo "Le fichier " . (basename($_FILES["couvertureLivre"]["name"])) . " a été uploadé avec succès.";
-        } else {
-            die("Erreur lors de l'upload du fichier.");
-        }
-
-
-
-
-
-
         }
         // sert a rediriger vers la page d'un topic
         $this->redirectTo ("forum","blibliostar",);
