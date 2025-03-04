@@ -8,11 +8,22 @@
 <section class="detailCategory">
 
     <h1>Topics pour <?= $category?> :</h1>
-    <a href="index.php?ctrl=forum&action=topicForm&id=<?= $category->getId()?>"><b>Ajouter un topic dans <?= $category ?> </b></a>
+    <a href="index.php?ctrl=forum&action=topicForm&id=<?= $category->getId()?>"><button><b>Ajouter un topic dans <?= $category ?> </b></button></a>
     <?php
     foreach($topics as $topic ){  
         ?>
-        <p><a href="index.php?ctrl=forum&action=post&id=<?= $topic->getId()?>"><?= $topic->getTitle() ?></a> par <?= $topic->getUser()->getPseudo() ?></p>
+        <a href="index.php?ctrl=forum&action=postsByTopics&id=<?= $topic->getId() ?>">
+            <div class="onePost">
+                    <img class="bookPost" src="<?= $topic->getBook()->getImg() ?>" alt="couverture de <?= $topic->getBook()->getTitle() ?>">
+                    <div class="rightPost">
+                        <h2><?= $topic->getTitle() ?> | <?= $topic->getBook()->getTitle() ?> - <?= $topic->getBook()->getAuthor() ?></h2>
+                        <p class="date"><?= $topic->getCreationDate() ?></p>
+                        <p><?= $topic->getUser()->getPseudo() ?></p>
+                        <i class="fa-solid fa-message"><p></p></i>
+                        <img src="public/img/heart-message.png" alt="heart message" class="heartMessage">
+                    </div>
+                </div>
+            </a>
         <?php }
 
 

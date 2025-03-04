@@ -14,6 +14,20 @@ h1 {
 /* CSS du layout */
 body{
     width: 100%;
+    #forum{
+        margin: 10px;
+    }
+    button{
+        border-radius: 5px;
+        padding: 0 5px;
+        border: none;
+        box-shadow: 4px 4px 2px pink;
+        transition: ease-in-out 0.1s;
+    }
+    button:hover{
+        scale: 1.05;
+        background-color: white;
+    }
     /* pour les ancres*/
     a{
         color: black;
@@ -178,11 +192,16 @@ body{
         display: flex;
         flex-direction: row;
         .left{
-            margin: 15px;
+            margin: 5px 5px 0 0;
             height: fit-content;
             width: fit-content;
-            padding: 1rem;
-            background-color: rgb(230, 230, 230);
+            padding: 0.5rem;
+            background-color: rgb(241, 241, 241);
+            .top{ /* ceci est le petit plus dans les categories*/
+                text-align: end;
+                scale: 1.2;
+                margin: 0 10px;
+            }
         }
         .right{
             width: 80%;
@@ -229,12 +248,29 @@ body{
         }
     }
 
+    .detailCategory{
+        .onePost{
+            background-color: #f6f6f6;
+            margin: 5px;
+            height: fit-content;
+            display: flex;
+            flex-direction: row;
+            .bookPost{
+                width: 10%;
+                height: fit-content;
+            }
+            .rightPost{
+                width: 75%;
+            }
+        }
+    }
+
     .user_account{
         height: 78vh;
         display: flex;
         flex-direction: row;
         .left{
-            margin: 10px;
+            margin: 10px 10px 0 0;
             padding: 5px;
             width: 10%;
             height: fit-content;

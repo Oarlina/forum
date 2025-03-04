@@ -1,6 +1,9 @@
 <p><a href="index.php" class="oldpath">Acceuil </a> > Lecture</p>
 <section class="listTopics">
     <div class="left">
+        <div class="top">
+           <a href="index.php?ctrl=forum&action=addCategoryForm"><i class="fa-solid fa-plus"></i></a>
+        </div>
         <?php
     $categories = $result["data"]['categories']; 
     $topics = $result["data"]['topics']; 
@@ -14,14 +17,13 @@
         ?>
         <p><a href="index.php?ctrl=forum&action=listTopicsByCategory&id=<?= $category->getId()?>"><?= $category->getTypeCategory() ?></a></p>
         <?php } ?>
-        <a href="index.php?ctrl=forum&action=addCategoryForm"><button>Ajouter une catégorie</button></a>
     </div>
 
     <div class="right">
         <?php
         foreach($topics as $topic){
             ?>
-                <a href="index.php?ctrl=forum&action=postsByTopics&id=<?= $topic->getId() ?>">
+            <a href="index.php?ctrl=forum&action=postsByTopics&id=<?= $topic->getId() ?>">
             <div class="onePost">
                     <img class="bookPost" src="<?= $topic->getBook()->getImg() ?>" alt="couverture de <?= $topic->getBook()->getTitle() ?>">
                     <div class="rightPost">

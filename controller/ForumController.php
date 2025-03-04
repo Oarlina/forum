@@ -167,16 +167,17 @@ class ForumController extends AbstractController implements ControllerInterface{
 
     }
     
-    public function topicForm($id){
+    public function topicForm($id_topic){
         $categoryManager = new categoryManager();
-        $id = $categoryManager->categoryById($id);
+        $category = $categoryManager->categoryById($id_topic);
         $bookManager = new bookManager();
-        $books = $bookManager->findBookByTopics($id);
+        $books = $bookManager->findAll();
         return [
             "view" => VIEW_DIR."addForm/addTopic.php",
             "meta_description" => "Formulaire de topic : ",
             "data" => [
-                "books" => $books
+                "books" => $books,
+                "category" => $category
             ]
         ];
     }
@@ -327,7 +328,7 @@ class ForumController extends AbstractController implements ControllerInterface{
             }
         }
         $categoryManager->add($data);
-        
+
         Session::addFlash("success", "La catégorie à été ajouté!");
         $this->redirectTo("forum", "index");
     }
