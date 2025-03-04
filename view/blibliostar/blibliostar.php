@@ -8,6 +8,7 @@
     <?php foreach($books as $book){?>
         <div class="book">
             <a href="index.php?ctrl=forum&action=OneBook&id=<?= $book->getId()?>">
+                <img src="<?= $book->getImg() ?>" alt="couverture de <?= $book->getTitle() ?>">
                 <p><?=$book->getTitle()?></p>
                 <p><?= $book->getAuthor()?></p>
             </a>
