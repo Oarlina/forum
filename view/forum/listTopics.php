@@ -21,13 +21,18 @@
         <?php
         foreach($topics as $topic){
             ?>
+                <a href="index.php?ctrl=forum&action=postsByTopics&id=<?= $topic->getId() ?>">
             <div class="onePost">
-                <h2><a href="index.php?ctrl=forum&action=postsByTopics&id=<?= $topic->getId() ?>"><?= $topic->getBook()->getTitle() ?>- <?= $topic->getBook()->getAuthor() ?></a></h2>
-                <p class="date"><?= $topic->getCreationDate() ?></p>
-                <p><?= $topic->getUser()->getPseudo() ?></p>
-                <i class="fa-solid fa-message"><p></p></i>
-                <img src="public/img/heart-message.png" alt="heart message" class="heartMessage">
-            </div>
+                    <img class="bookPost" src="<?= $topic->getBook()->getImg() ?>" alt="couverture de <?= $topic->getBook()->getTitle() ?>">
+                    <div class="rightPost">
+                        <h2><?= $topic->getTitle() ?> | <?= $topic->getBook()->getTitle() ?> - <?= $topic->getBook()->getAuthor() ?></h2>
+                        <p class="date"><?= $topic->getCreationDate() ?></p>
+                        <p><?= $topic->getUser()->getPseudo() ?></p>
+                        <i class="fa-solid fa-message"><p></p></i>
+                        <img src="public/img/heart-message.png" alt="heart message" class="heartMessage">
+                    </div>
+                </div>
+            </a>
             <?php } ?>
     </div>
 </section>

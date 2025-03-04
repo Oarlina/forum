@@ -187,12 +187,19 @@ body{
         .right{
             width: 80%;
             height: fit-content;
-            /* display: flex;
-            flex-wrap: wrap; */
             .onePost{
                 background-color: #f6f6f6;
                 margin: 5px;
-                /* width: 32%; */
+                height: fit-content;
+                display: flex;
+                flex-direction: row;
+                .bookPost{
+                    width: 10%;
+                    height: fit-content;
+                }
+                .rightPost{
+                    width: 75%;
+                }
             }
         }
     }
