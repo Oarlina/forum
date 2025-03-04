@@ -1,15 +1,16 @@
 <?php
 namespace Controller;
 
+use DateTime;
 use App\Session;
 use App\AbstractController;
 use App\ControllerInterface;
+use Model\Managers\BookManager;
+use Model\Managers\postManager;
+use Model\Managers\UserManager;
+use Model\Managers\TopicManager;
 use Model\Managers\CategoryManager;
 use Model\Managers\CategoryBookManager;
-use Model\Managers\TopicManager;
-use Model\Managers\UserManager;
-use Model\Managers\postManager;
-use Model\Managers\BookManager;
 
 class ForumController extends AbstractController implements ControllerInterface{
 
@@ -193,7 +194,7 @@ class ForumController extends AbstractController implements ControllerInterface{
         ];
     }
     // m'ajoute le formulaire dans la base de donnée
-    public function addBookBDD(){
+    /*public function addBookBDD(){
         // je recupere les données du formulaire
         if (isset($_POST['submit'])) // si on a cliquer sur le bouton
         {
@@ -276,9 +277,118 @@ class ForumController extends AbstractController implements ControllerInterface{
                     Session::addFlash("error", "Veuillez remplir les informations du livre");
                 }
         }
+
+
+        
         // sert a rediriger vers la page d'un topic
         $this->redirectTo ("forum","blibliostar",);
+    }*/
+
+public function addBookBDD()
+{
+    if (!isset($_POST['submit'])) {
+        $this->redirectTo("forum", "blibliostar"); // /!\ apres un return la fonction se termine directement /!\
     }
+
+    // Vérification des données du formulaire
+    $title = filter_input(INPUT_POST, "title", FILTER_SANITIZE_SPECIAL_CHARS);
+    $author = filter_input(INPUT_POST, "author", FILTER_SANITIZE_SPECIAL_CHARS);
+    $edition = filter_input(INPUT_POST, "edition", FILTER_SANITIZE_SPECIAL_CHARS);
+    $releaseDate = filter_input(INPUT_POST, "releaseDate", FILTER_SANITIZE_SPECIAL_CHARS);
+    $summary = filter_input(INPUT_POST, "summary", FILTER_SANITIZE_SPECIAL_CHARS);
+    $numberPage = filter_input(INPUT_POST, "numberPage", FILTER_VALIDATE_INT);
+
+    if (empty($title) || empty($author) || empty($edition) || empty($releaseDate) || empty($summary) || empty($numberPage)) { // on verifie que les données du formulaire n'est pas vide
+        Session::addFlash("error", "Tous les champs sont obligatoires !");
+        $this->redirectTo("forum", "blibliostar");
+    }
+
+    // Vérification et normalisation de la date
+    $date = DateTime::createFromFormat('Y-m-d', $releaseDate);
+    if (!$date) {
+        Session::addFlash("error", "La date de sortie est invalide !");
+        $this->redirectTo("forum", "blibliostar");
+    }
+
+    // Gestion de l'upload d'image
+    $uploadOk = 1;
+    $imageFileType = null;
+    $targetFile = null;
+
+    if (empty($_FILES["couvertureLivre"]["name"])) { // on test si on a ajouter un fichier
+        Session::addFlash("error", "Le fichier n'est pas envoyer !");
+        $this->redirectTo("forum", "blibliostar");
+    }
+    $targetDir = "public/uploads/";
+    $imageFileType = strtolower(pathinfo($_FILES['couvertureLivre']['name'], PATHINFO_EXTENSION));
+    $targetFile = $targetDir . uniqid('book_') . '.' . $imageFileType; // pour que chaque livre commence par "book_"
+
+    // Vérification de l'image
+    $check = getimagesize($_FILES["couvertureLivre"]["tmp_name"]);
+    if ($check === false) {
+        Session::addFlash("error", "Le fichier n'est pas une image.");
+        $uploadOk = 0;
+    }
+
+    // Vérifier la taille du fichier (max 5Mo)
+    if ($_FILES["couvertureLivre"]["size"] > 5000000) {
+        Session::addFlash("error", "L'image est trop volumineuse (max 5 Mo).");
+        $uploadOk = 0;
+    }
+
+    // Vérification du format de fichier
+    $allowedFormats = ["jpg", "jpeg", "png", "gif"];
+    if (!in_array($imageFileType, $allowedFormats)) {
+        Session::addFlash("error", "Formats acceptés : JPG, JPEG, PNG, GIF.");
+        $uploadOk = 0;
+    }
+
+    // Gestion des catégories (mis ici pour eviter de rajouter le livre ou l'image si y a pas de catégorie sélectionée)
+    if (!isset($_POST['categories']) || !is_array($_POST['categories'])) { // on verifie si si les categories sont vide et si on a un tableau des categories
+        Session::addFlash("error", "Veuillez sélectionner au moins une catégorie.");
+        $this->redirectTo("forum", "blibliostar");
+    }
+
+    // Déplacement du fichier si tout est OK
+    if ($uploadOk && !move_uploaded_file($_FILES["couvertureLivre"]["tmp_name"], $targetFile)) {
+        Session::addFlash("error", "Erreur lors de l'upload de l'image.");
+        $this->redirectTo("forum", "blibliostar");
+    }
+
+    // Ajout du livre en base de données
+    $bookManager = new BookManager();
+    $img =  $targetFile;
+    $data = [
+        "title" => $title,
+        "author" => $author,
+        "edition" => $edition,
+        "releaseDate" => $releaseDate,
+        "summary" => $summary,
+        "numberPage" => $numberPage,
+        "img" => $img
+    ];
+    $book = $bookManager->add($data);
+
+    if (!$book) {
+        Session::addFlash("error", "Erreur lors de l'ajout du livre.");
+        $this->redirectTo("forum", "blibliostar");
+    }
+
+    $categoryBookManager = new CategoryBookManager();
+    foreach ($_POST['categories'] as $category) {
+        if (!is_numeric($category)) {
+            continue; // Ignore les valeurs invalides
+        }
+        $categoryBookManager->add([
+            "category_id" => (int) $category,
+            "book_id" => $book
+        ]);
+    }
+
+    Session::addFlash("success", "Livre ajouté avec succès !");
+    $this->redirectTo("forum", "blibliostar");
+}
+ 
 
     public function addCategoryForm (){
         return [

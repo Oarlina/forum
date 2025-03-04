@@ -18,6 +18,7 @@ final class Book extends Entity{
     private $summary;
     private $gender;
     private $numberPage;
+    private $img;
 
     // chaque entité aura le même constructeur grâce à la méthode hydrate (issue de App\Entity)
     public function __construct($data){         
@@ -107,6 +108,17 @@ final class Book extends Entity{
     public function setNumberPage($numberPage)
     {
         $this->numberPage = $numberPage;
+
+        return $this;
+    }
+    
+    public function getImg()
+    {
+        return $this->img;
+    }
+    public function setImg($img)
+    {
+        $this->img = $img;
 
         return $this;
     }

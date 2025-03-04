@@ -315,12 +315,16 @@ body{
                 img{
                     width: 24%;
                     height: fit-content;
+                    margin: 5px;
                 }
                 .right{
                     width: 75%;
+                    padding: 5px;
                     p{
                         width: 100%;
+                        margin: 5px;
                         height: fit-content;
+                        text-align: justify;
                     }
                 }
             }
