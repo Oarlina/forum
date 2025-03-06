@@ -1,24 +1,81 @@
 <?php
 namespace Controller;
 
+use App\Session;
+use App\DAO;
 use App\AbstractController;
 use App\ControllerInterface;
+//j'ai rajouter
+use Model\Managers\UserManager;
 
 class SecurityController extends AbstractController{
     // contiendra les méthodes liées à l'authentification : register, login et logout
 
     public function register () {
         return [
-            "view" => VIEW_DIR."account/subscription.php",
+            "view" => VIEW_DIR."account/register.php",
             "meta_description" => "Page d'inscription"
         ];
     }
+
+    public function register_BDD(){
+        // var_dump($_POST);
+        if (isset($_POST['submit']))
+        {
+            $this->redirectTo("security", "register");
+        }
+
+        $pseudo = filter_input(INPUT_POST,"pseudo",FILTER_SANITIZE_SPECIAL_CHARS);
+        $email = filter_input(INPUT_POST,"email",FILTER_SANITIZE_SPECIAL_CHARS, FILTER_VALIDATE_EMAIL);
+        $password = filter_input(INPUT_POST,"password", FILTER_SANITIZE_SPECIAL_CHARS);
+        $password2 = filter_input(INPUT_POST,"password2", FILTER_SANITIZE_SPECIAL_CHARS);
+        
+        // si une des variables n'est pas correcte
+        if (!($pseudo && $email && $password && $password2)){ 
+            Session::addFlash("error", "Formulaire incomplet !");
+            $this->redirectTo("security", "register");
+        }
+
+        // on verifie si les mots de passes sont different et s'il font au moins 12 caractere
+        if ($password != $password2 || strlen($password)<12){
+            Session::addFlash("error", "Problème dans l'inscription, recommencez !");
+            $this->redirectTo("security", "register");
+        }
+
+        // on verifie que le mail n'existe pas déjà 
+        // $requete = $pdo->prepare("SELECT * FROM user WHERE email = :email");
+        // $requete->execute(["email" => $email]);
+        // $user = $requete->fetch();
+        $userManager = new UserManager();
+        $user = $userManager->emailExist($email);
+        // var_dump($user); die;
+        $role = "user";
+        // si le mail n'existe pas on le rajoute a la bdd sinon il ira directement dans connexion (pour eviter qu'un hacker essaie d'avoir son mail/pseudo)
+        if ($user == 0){
+            $data = [
+                "pseudo" => $pseudo,
+                "email" => $email,
+                "password" => $password,
+                "role" => $role
+            ];
+            $userManager->add($data);
+        }
+    
+        Session::addFlash("success", "Inscription réussi ou compte déjà crée");
+        header("Location: index.php"); // pour retrouner a la page d'acceuil
+    }
+
     public function login () {
         return [
-            "view" => VIEW_DIR."account/connexion.php",
+            "view" => VIEW_DIR."account/login.php",
             "meta_description" => "Page de connexion"
         ];
     }
-    public function logout () {}
+    public function logout () {
+        unset($_SESSION["user"]);
+        $this->redirectTo();
+    }
+    
+
 
 }

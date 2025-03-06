@@ -1,4 +1,4 @@
-<form action="post">
+<form action="index.php?ctrl=security&action=register_BDD" method="post">
     <label for="pseudo">Votre pseudo: </label><br>
     <input type="text" name="pseudo"><br>
 
@@ -6,13 +6,13 @@
     <input type="mail" name="email"><br>
 
     <label for="password">Votre mot de passe: </label><br>
-    <input type="text" name="password"><br>
+    <input type="password" name="password"><br>
 
     <label for="password2">Confirmer votre mot de passe: </label><br>
-    <input type="text" name="password2"><br>
+    <input type="password" name="password2"><br>
 
     <input type="checkbox" name="valider"> 
-    <label for="valider">En cliquant sur S’inscrire, vous acceptez nos Conditions d’utilisation. Consultez notre 
+    <label for="">En cliquant sur S’inscrire, vous acceptez nos Conditions d’utilisation. Consultez notre 
         Politique de confidentialité pour savoir comment nous recueillons, utilisons et transmettons vos données, 
         ainsi que notre Politique d’utilisation des témoins pour savoir comment nous utilisons les témoins et 
         d’autres moyens technologiques similaires. Vous pourriez recevoir des notifications de notre part par 
@@ -20,5 +20,5 @@
     </label><br>
     <p>ou</p>
     <p>S'inscrire avec Google</p>
-    <button>S'inscrire</button>
+    <input type="submit" value="S'inscrire">
 </form>

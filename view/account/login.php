@@ -1,4 +1,4 @@
-<form action="post">
+<form action="" method="post">
     <label for="pseudo_mail">Votre pseudo ou votre mail: </label><br>
     <input type="text" name="pseudo_mail"><br>
 

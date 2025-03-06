@@ -169,7 +169,7 @@ class ForumController extends AbstractController implements ControllerInterface{
     
     public function topicForm($id_topic){
         $categoryManager = new categoryManager();
-        $category = $categoryManager->categoryById($id_topic);
+        $category = $categoryManager->findOneById($id_topic);
         $bookManager = new bookManager();
         $books = $bookManager->findAll();
         return [
@@ -180,6 +180,22 @@ class ForumController extends AbstractController implements ControllerInterface{
                 "category" => $category
             ]
         ];
+    }
+
+    public function addTopicBDD($id_category){
+        if (!isset($_POST['submit'])) {
+            $this->redirectTo("forum", "listTopicsByCategory",$id_category); // /!\ apres un return la fonction se termine directement /!\
+        }
+        var_dump($_POST);die;
+        $title = filter_input(INPUT_POST, "title", FILTER_SANITIZE_SPECIAL_CHARS);
+
+        if (empty($title)){ // si le title est vide
+            Session::addFlash('error','Veuillez remplir tous les champs');
+            $this->redirectTo("forum", "listTopicsByCategory",$id_category);
+        }
+
+
+        
     }
 
     // m'envoie sur la page du formulaire

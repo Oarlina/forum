@@ -13,4 +13,12 @@ class UserManager extends Manager{
     public function __construct(){
         parent::connect();
     }
+
+    public function emailExist ($email){
+        $sql = "SELECT email FROM ".$this->tableName." WHERE email = :email";
+       if (isset($sql)){
+        return 0;
+       }
+       return  1;
+    }
 }

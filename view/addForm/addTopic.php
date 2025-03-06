@@ -1,17 +1,24 @@
 <section class="add">
-    <form action="" method="post">
-        <?php
-            $books = $result['data']['books'];
+    <?php
+        $books = $result['data']['books'];
+        $category = $result['data']['category'];
         //if(App\Session::getUser()){
             // si l'utilisateur est connecter
-        ?>
-            <select name="" id="">
+    ?>
+    <form action="index.php?ctrl=forum&action=addTopicBDD&id=<?= $category->getId() ?>" method="post">
+            <select name="book" id="">
                 <option value="default">Choissisiez le livre du post :</option>
                 <?php foreach( $books as $book){ ?>
-                    <option value="<?= $book->getId() ?>"><?= $book->getTitle() ?></option>
+                    <option name="<?= $book->getId() ?>"><?= $book->getTitle() ?></option>
                 <?php } ?>
             </select>
-            <button value="submit">Valider </button> <br>
+
+            <label for="">Titre du post : </label> 
+            <input type="text" name="title">
+
+
+
+            <button value="submit" name="submit">Valider </button> <br>
             <?php //}else{ ?>
             <!-- <p>Veuillez vous connecter.</p> -->
         <?php //} ?>
