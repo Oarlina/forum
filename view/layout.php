@@ -50,7 +50,7 @@
                             else{
                                 ?>
                                 <div class="button_conexion_inscritption">
-                                    <a href="index.php?ctrl=security&action=login">Connexion</a>
+                                    <a href="index.php?ctrl=security&action=login_form">Connexion</a>
                                 </div>
                                 <div class="button_conexion_inscritption">
                                     <a href="index.php?ctrl=security&action=register">Inscription</a>

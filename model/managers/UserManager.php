@@ -15,10 +15,24 @@ class UserManager extends Manager{
     }
 
     public function emailExist ($email){
-        $sql = "SELECT email FROM ".$this->tableName." WHERE email = :email";
+        $sql = "SELECT email 
+                FROM ".$this->tableName." 
+                WHERE email = :email";
        if (isset($sql)){
         return 0;
        }
        return  1;
+    }
+
+    public function findOneByEmail ($email){
+        $sql = "SELECT * 
+                FROM ".$this->tableName." t 
+                WHERE email = :email";
+       
+        // la requête renvoie plusieurs enregistrements --> getMultipleResults
+        return  $this->getMultipleResults(
+            DAO::select($sql, ["email" => $email]), 
+            $this->className
+        );
     }
 }
