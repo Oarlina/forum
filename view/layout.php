@@ -40,8 +40,7 @@
                             // si l'utilisateur est connecté 
                             if(App\Session::getUser()){
                                 ?>
-                                <a href="index.php?ctrl=security&action=profile"><span class="fas fa-user"></span>&nbsp;<?= App\Session::getUser()?></a>
-                                <i class="fa-solid fa-user"></i>
+                                <a href="index.php?ctrl=forum&action=user_account"><span class="fas fa-user"></span>&nbsp;<?= App\Session::getUser()?></a>
                                 <div class="button_conexion_inscritption">
                                     <a href="index.php?ctrl=security&action=logout">Déconnexion</a>
                                 </div>

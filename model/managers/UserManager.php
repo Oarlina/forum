@@ -14,24 +14,14 @@ class UserManager extends Manager{
         parent::connect();
     }
 
-    public function emailExist ($email){
-        $sql = "SELECT email 
-                FROM ".$this->tableName." 
-                WHERE email = :email";
-       if (isset($sql)){
-        return 0;
-       }
-       return  1;
-    }
-
     public function findOneByEmail ($email){
         $sql = "SELECT * 
-                FROM ".$this->tableName." t 
+                FROM ".$this->tableName." 
                 WHERE email = :email";
        
-        // la requête renvoie plusieurs enregistrements --> getMultipleResults
-        return  $this->getMultipleResults(
-            DAO::select($sql, ["email" => $email]), 
+        // la requête renvoie un enregistrement ->getOneOrNullResult
+        return  $this->getOneOrNullResult(
+            DAO::select($sql, ["email" => $email], false), 
             $this->className
         );
     }

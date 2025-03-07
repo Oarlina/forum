@@ -44,20 +44,24 @@ class SecurityController extends AbstractController{
 
         // on verifie que le mail n'existe pas déjà 
         $userManager = new UserManager();
-        $user = $userManager->emailExist($email);
+        $user = $userManager->findOneByEmail($email);
         $role = "user";
         $pass = password_hash($password,PASSWORD_DEFAULT);
-        // si le mail n'existe pas on le rajoute a la bdd sinon il ira directement dans connexion (pour eviter qu'un hacker essaie d'avoir son mail/pseudo)
-        if ($user == 0){
-            $data = [
-                "pseudo" => $pseudo,
-                "email" => $email,
-                "password" => $pass,
-                "role" => $role
-            ];
-            $userManager->add($data);
+
+        // si le mail existe on n'enrgistre pas
+        if ($user != null){
+            Session::addFlash("error", "Compte déjà crée");
+            $this->redirectTo("security", "login_form");
         }
-    
+        $data = [
+            "email" => $email,
+            "pseudo" => $pseudo,
+            "password" => $pass,
+            "role" => $role
+        ];
+        
+        $a = $userManager->add($data);
+        
         Session::addFlash("success", "Inscription réussi ou compte déjà crée");
         header("Location: index.php"); // pour retrouner a la page d'acceuil
     }
@@ -74,34 +78,35 @@ class SecurityController extends AbstractController{
         {
             $this->redirectTo("security", "login_form");
         }
-        // on filtre les variable
+        // on filtre les variables
         $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_SPECIAL_CHARS, FILTER_VALIDATE_EMAIL);
         $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_SPECIAL_CHARS);
-
+        // var_dump($email, $password);die;
+        
         // on verifie si le mail et le mot de passe sont donner
-        if (isset($email) && isset($password)) {
+        if ($email == null && $password == null) {
             Session::addFlash("success", "Formulaire incomplet");
-            header("Location: login.php");
+            $this->redirectTo("security", "login_form");
         }
         // on recupere l'utilisateur
         $userManager = new UserManager();
         $user = $userManager->findOneByEmail($email);
-        
+        // var_dump ($user->getPassword()); die;
+
         //on verifie que le mot de passe est le bon
-        $hash = $user["password"];
+        $hash = $user->getPassword(); // on recupere le mode de passe de l'utilisateur
         if (password_verify($password, $hash)){ // si le mot de passe d'inscription est le meme que celui de connexion, il compare les empreinte numerique
             $_SESSION["user"] = $user; // on lance la session d'un utilisateur dans session
-            header("Location: home.php");
+            $this->redirectTo("");
         }else {
-            Session::addFlash("success", "Email ou mot de passe invalide");
+            Session::addFlash("error", "Email ou mot de passe invalide");
+            $this->redirectTo("forum", "user_account");
         }
-        header("Location: index.php"); // pour retrouner a la page d'acceuil
+        Session::addFlash("success", "Bienvenue!!");
+        header("Location: home.php"); // pour retrouner a la page d'acceuil
     }
     public function logout () {
-        unset($_SESSION["user"]);
-        $this->redirectTo();
+        unset($_SESSION["user"]); 
+        $this->redirectTo("", "");
     }
-    
-
-
 }
