@@ -97,16 +97,15 @@ class SecurityController extends AbstractController{
         $hash = $user->getPassword(); // on recupere le mode de passe de l'utilisateur
         if (password_verify($password, $hash)){ // si le mot de passe d'inscription est le meme que celui de connexion, il compare les empreinte numerique
             $_SESSION["user"] = $user; // on lance la session d'un utilisateur dans session
-            $this->redirectTo("");
         }else {
             Session::addFlash("error", "Email ou mot de passe invalide");
             $this->redirectTo("forum", "user_account");
         }
-        Session::addFlash("success", "Bienvenue!!");
-        header("Location: home.php"); // pour retrouner a la page d'acceuil
+        Session::addFlash("success", "Bienvenue!");
+        $this->redirectTo("index");
     }
     public function logout () {
         unset($_SESSION["user"]); 
-        $this->redirectTo("", "");
+        $this->redirectTo("index");
     }
 }
