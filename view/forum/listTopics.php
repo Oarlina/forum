@@ -1,21 +1,17 @@
 <p><a href="index.php" class="oldpath">Acceuil </a> > Lecture</p>
 <section class="listTopics">
+
     <div class="left">
         <div class="top">
            <a href="index.php?ctrl=forum&action=addCategoryForm"><i class="fa-solid fa-plus"></i></a>
         </div>
         <?php
-    $categories = $result["data"]['categories']; 
-    $topics = $result["data"]['topics']; 
-    $users = $result["data"]['users'];
-    // $posts = $result['data']['posts'];
-    
-    
-    
-
-    foreach($categories as $category){
-        ?>
-        <p><a href="index.php?ctrl=forum&action=listTopicsByCategory&id=<?= $category->getId()?>"><?= $category->getTypeCategory() ?></a></p>
+        $categories = $result["data"]['categories']; 
+        $topics = $result["data"]['topics']; 
+        $users = $result["data"]['users'];
+        // $posts = $result['data']['posts'];
+        foreach($categories as $category){?>
+            <p><a href="index.php?ctrl=forum&action=listTopicsByCategory&id=<?= $category->getId()?>"><?= $category->getTypeCategory() ?></a></p>
         <?php } ?>
     </div>
 

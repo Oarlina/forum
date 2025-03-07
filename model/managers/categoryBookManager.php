@@ -23,4 +23,18 @@ class categoryBookManager extends Manager{
             $this->className
         );
     }
+
+    public function findBooksByCategory($id_category){
+        $sql = "SELECT *
+                FROM ".$this->tableName." cb
+                INNER JOIN book b ON cb.book_id = b.id_book
+                INNER JOIN category c ON cb.category_id = c.id_category
+                WHERE cb.category_id = ". $id_category;
+        
+        // la requête renvoie plusieurs enregistrements --> getMultipleResults
+        return  $this->getMultipleResults(
+            DAO::select($sql), 
+            $this->className
+        );
+    }
 }

@@ -91,19 +91,23 @@ class ForumController extends AbstractController implements ControllerInterface{
 
     // il affiche un seul post
     public function postsByTopics ($idTopic){
-        $postManager = new postManager();
-        $posts = $postManager->findPostsByTopic($idTopic);
         $topicManager = new TopicManager();
         $topic = $topicManager->findOneById($idTopic);
+
         $bookManager = new bookManager;
         $book = $bookManager->findoneById($topic->getBook()->getId());
+
+        $postManager = new postManager();
+        $firstPost = $postManager->findFirstPost($idTopic);
+        $posts = $postManager->findOtherPost($idTopic, $firstPost->getId());
         return [
             "view" => VIEW_DIR."forum/postsByTopics.php",
             "meta_description" => "Compte : ",
             "data" => [
                 "posts" => $posts,
                 "topic" => $topic,
-                "book" => $book
+                "book" => $book,
+                "firstPost" => $firstPost
             ]
         ];
     }
@@ -170,8 +174,9 @@ class ForumController extends AbstractController implements ControllerInterface{
     public function topicForm($id_topic){
         $categoryManager = new categoryManager();
         $category = $categoryManager->findOneById($id_topic);
-        $bookManager = new bookManager();
-        $books = $bookManager->findAll();
+        $cbManager = new CategoryBookManager();
+        $books = $cbManager->findBooksByCategory($category->getId());
+        // var_dump($cbManager->findBooksByCategory($category->getId()));die;
         return [
             "view" => VIEW_DIR."addForm/addTopic.php",
             "meta_description" => "Formulaire de topic : ",
@@ -186,16 +191,41 @@ class ForumController extends AbstractController implements ControllerInterface{
         if (!isset($_POST['submit'])) {
             $this->redirectTo("forum", "listTopicsByCategory",$id_category); // /!\ apres un return la fonction se termine directement /!\
         }
-        var_dump($_POST);die;
+        $book_id = filter_input(INPUT_POST, "book", FILTER_SANITIZE_SPECIAL_CHARS);
         $title = filter_input(INPUT_POST, "title", FILTER_SANITIZE_SPECIAL_CHARS);
+        $first_post = filter_input(INPUT_POST, "first_post", FILTER_SANITIZE_SPECIAL_CHARS);
 
-        if (empty($title)){ // si le title est vide
+        // je verifie que le titre et le premier messga n'est pas vide
+        if (empty($title) || empty($first_post) || empty($book_id)){ // si le title est vide
             Session::addFlash('error','Veuillez remplir tous les champs');
             $this->redirectTo("forum", "listTopicsByCategory",$id_category);
         }
 
-
+        $topicManager = new TopicManager();
+        $isLock = 0;
+        $userManager = new UserManager();
+        $user = $userManager->findOneById(Session::getUser()->getId());
         
+        // on ajoute un post sur le livre
+        $data = [
+            "title" => $title,
+            "isLock" => $isLock,
+            "category_id" => $id_category,
+            "user_id" => $user->getId(),
+            "book_id" => $book_id
+        ];
+        $topic = $topicManager->add($data); // je l'ajoute a ma bdd et en meme temps je reucpere l'id du topic
+
+
+        // on ajoute le premier post du topic
+        $postManager = new PostManager ();
+        // var_dump($topic); die;
+        $data = ["textPost" => $first_post,
+                 "user_id" => Session::getUser()->getId(),
+                 "topic_id" => $topic];
+        $post = $postManager->add($data);
+
+        $this->redirectTo("forum", "listTopicsByCategory", $id_category);
     }
 
     // m'envoie sur la page du formulaire

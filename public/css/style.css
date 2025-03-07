@@ -16,10 +16,25 @@ body{
     width: 100%;
     #forum{
         margin: 10px;
+        .title{
+            text-align: center;
+        }
+        .firstPost{
+            background-color: #f6f6f6;
+            width: 100%;
+            height: fit-content;
+        }
+        .top{
+            background-color: #f2f2f2;
+            width: 100%;
+            height: fit-content;
+            margin: 8px 0 ;
+        }
     }
     button{
         border-radius: 5px;
         padding: 0 5px;
+        margin: 5px;
         border: none;
         box-shadow: 4px 4px 2px pink;
         transition: ease-in-out 0.1s;
@@ -373,6 +388,7 @@ body{
             }
         }
     }
+    
 
     /*------------------------------- Les formulaires --------------------------------*/
 
