@@ -2,10 +2,6 @@
 
 <section class="add">
     <form action="index.php?ctrl=forum&action=addBookBDD" method="post" enctype="multipart/form-data">
-        <?php
-        //if(App\Session::getUser()){
-            // si l'utilisateur est connecter
-        ?>
             <label for="">Entrer le titre du livre :</label> <br>
             <input type="text" name="title" class="in"> </input> <br>
 
@@ -37,9 +33,6 @@
 
 
             <button value="submit" name='submit' class="in">Valider </button> <br>
-            <?php //}else{ ?>
-            <!-- <p>Veuillez vous connecter.</p> -->
-        <?php //} ?>
 
     </form>
 </section>

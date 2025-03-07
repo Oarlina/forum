@@ -380,4 +380,16 @@ class ForumController extends AbstractController implements ControllerInterface{
     }
 
 
+
+
+    // ****************************************************************************** / Suppression  ******************************************************************************
+
+    public function deleteUserAccount ($id_user){
+        // je deconnecte l'utilisateur je supprime le compte et je le ramene a l'index
+        unset($_SESSION["user"]); 
+        $userManager = new UserManager();
+        $user =$userManager->delete($id_user); // j'utilise la fonction delete qui est dans manager
+        $this->redirectTo("index");
+    }
+
 }

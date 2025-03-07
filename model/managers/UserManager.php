@@ -25,4 +25,5 @@ class UserManager extends Manager{
             $this->className
         );
     }
+
 }

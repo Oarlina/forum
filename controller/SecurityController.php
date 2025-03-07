@@ -92,7 +92,10 @@ class SecurityController extends AbstractController{
         $userManager = new UserManager();
         $user = $userManager->findOneByEmail($email);
         // var_dump ($user->getPassword()); die;
-
+        if (isset($user)){
+            Session::addFlash("error", "Compte inexistant");
+            $this->redirectTo("index");
+        }
         //on verifie que le mot de passe est le bon
         $hash = $user->getPassword(); // on recupere le mode de passe de l'utilisateur
         if (password_verify($password, $hash)){ // si le mot de passe d'inscription est le meme que celui de connexion, il compare les empreinte numerique

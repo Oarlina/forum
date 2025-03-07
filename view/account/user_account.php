@@ -2,15 +2,10 @@
 <section class="user_account">
     <?php
         $user = App\Session::getUser();
-        // var_dump($user);
         ?>
 
     <div class="left">
-            <?php
- 
-            ?>
             <img src="public/img/user/<?= $user->getPseudo() ?>.jpg" alt="image de <?= $user->getPseudo() ?>">
-
 
             <h2><?= $user->getPseudo() ?></h2>
             <a href="#">Profil</a>
@@ -38,7 +33,7 @@
             <li>Seuleument mes amis</li>
             <li>Moi uniquement</li>
         </ul>
-        <button type="button">Supprimer mon compte</button>
+        <a href="index.php?ctrl=forum&action=deleteUserAccount&id=<?= APP\Session::getUser()->getId() ?>"><button>Supprimer mon compte</button></a>
 
     </div>
     
