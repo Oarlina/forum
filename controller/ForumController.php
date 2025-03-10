@@ -111,17 +111,20 @@ class ForumController extends AbstractController implements ControllerInterface{
             ]
         ];
     }
-    public function OneBook($id_book){
+    public function detailBook($id_book){
         $bookManager = new bookManager;
         $book = $bookManager->findOneById($id_book);
         $ctManager = new CategoryBookManager;
         $categories = $ctManager->findCategoryByBook($id_book);
+        $topicManager = new TopicManager();
+        $topics = $topicManager->findTopicsByBook($id_book);
         return [
             "view" => VIEW_DIR."blibliostar/detailBook.php",
             "meta_description" => "Livre : ",
             "data" => [
                 "book"=> $book,
-                "categories" => $categories
+                "categories" => $categories,
+                "topics" => $topics
             ]
         ];
     }

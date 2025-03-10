@@ -1,6 +1,7 @@
 <?php 
     $book = $result['data']['book'];
     $categories = $result['data']['categories'];
+    $topics = $result['data']['topics'];
 ?>
 <p><a href="index.php" class="oldpath">Acceuil </a> > <a href="index.php?ctrl=forum&action=blibliostar" class="oldpath">Blibliostar </a> > <?= $book->getTitle() ?></p>
 <section class="book">
@@ -22,5 +23,17 @@
             </div>
         </div>
     </div>
-    <a href="index.php?ctrl=forum&action=topicBookForm&id=<?= $book->getId()?>"><button>Ajouter un topic</button></a>
+    <div class="listTopics">
+        
+        <?php 
+        // var_dump($topics['topics']);die;
+        if ($topics == null){
+            ?> <p>Aucun topic lier au livre !</p> <?php
+        }else{
+        foreach($topics as $topic){ ?>
+            <a href="index.php?ctrl=forum&action=postsByTopics&id=<?= $topic->getId()?>"><?= $topic->getTitle() ?></a> <br>
+        <?php }}if(App\Session::getUser()){ ?>
+        <a href="index.php?ctrl=forum&action=topicBookForm&id=<?= $book->getId()?>"><button>Ajouter un topic</button></a>
+        <?php } ?>
+    </div>
 </section>

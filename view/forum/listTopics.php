@@ -3,7 +3,7 @@
 
     <div class="left">
         <div class="top">
-            <?php if(App\Session::getUser()){ ?>
+            <?php if(App\Session::getUser() && App\Session::getUser()->getRole() == "admin"){ ?>
                 <a href="index.php?ctrl=forum&action=addCategoryForm"><i class="fa-solid fa-plus"></i></a> 
             <?php } ?>
         </div>
