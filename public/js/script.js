@@ -10,3 +10,4 @@ function changeInput(nameInput){
         password_login.type = "password";
     }
 }
+

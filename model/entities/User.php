@@ -16,6 +16,7 @@ final class User extends Entity{
     private $password;
     private $userCreation;
     private $role;
+    private $avatar;
 
     public function __construct($data){         
         $this->hydrate($data);        
@@ -81,6 +82,16 @@ final class User extends Entity{
     public function setRole($role)
     {
         $this->role = $role;
+
+        return $this;
+    }
+    public function getAvatar()
+    {
+        return $this->avatar;
+    }
+    public function setAvatar($avatar)
+    {
+        $this->avatar = $avatar;
 
         return $this;
     }

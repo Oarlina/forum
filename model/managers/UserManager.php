@@ -26,4 +26,15 @@ class UserManager extends Manager{
         );
     }
 
+    public function findAllOrderByRole (){
+        $sql = "SELECT * 
+                FROM ".$this->tableName." 
+                ORDER BY role";
+       
+        // la requête renvoie un enregistrement ->getOneOrNullResult
+        return  $this->getMultipleResults(
+            DAO::select($sql, []), 
+            $this->className
+        );
+    }
 }

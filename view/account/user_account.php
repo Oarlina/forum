@@ -5,7 +5,7 @@
         ?>
 
     <div class="left">
-            <img src="public/img/user/<?= $user->getPseudo() ?>.jpg" alt="image de <?= $user->getPseudo() ?>">
+            <img src="<?= $user->getAvatar()?>" alt="image de <?= $user->getPseudo() ?>">
 
             <h2><?= $user->getPseudo() ?></h2>
             <a href="#">Profil</a>
@@ -19,7 +19,7 @@
     </div>
  
     <div class="right">
-        <img src="public/img/user/<?= $user->getPseudo() ?>.jpg" alt="image de <?= $user->getPseudo() ?>">
+        <img src="<?=$user->getAvatar()?>" alt="image de <?= $user->getPseudo() ?>">
         <button type="button">Changer l'avatar</button>
         <p>Pseudo : <?= $user->getPseudo() ?></p>
         <button type="button">Changer le pseudo</button>

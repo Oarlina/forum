@@ -48,19 +48,60 @@ class SecurityController extends AbstractController{
         $role = "user";
         $pass = password_hash($password,PASSWORD_DEFAULT);
 
-        // si le mail existe on n'enrgistre pas
+        // si le mail existe on n'enregistre pas
         if ($user != null){
             Session::addFlash("error", "Compte déjà crée");
             $this->redirectTo("security", "login_form");
+        }
+
+        // Gestion de l'upload d'image
+        $uploadOk = 1;
+        $imageFileType = null;
+        $targetFile = null;
+        // on test si on a ajouter un fichier   
+
+        if (empty($_FILES["avatar"]["name"])) { 
+            Session::addFlash("error", "Le fichier n'est pas envoyer !");
+            $this->redirectTo("forum", "blibliostar");
+        }
+        $targetDir = "public/uploads/";
+        $imageFileType = strtolower(pathinfo($_FILES['avatar']['name'], PATHINFO_EXTENSION));
+        $targetFile = $targetDir . uniqid('avatar_') . '.' . $imageFileType; // pour que chaque livre commence par "avatar_"
+
+        // Vérification de l'image
+        $check = getimagesize($_FILES["avatar"]["tmp_name"]);
+        if ($check === false) {
+            Session::addFlash("error", "Le fichier n'est pas une image.");
+            $uploadOk = 0;
+        }
+
+        // Vérifier la taille du fichier (max 5Mo)
+        if ($_FILES["avatar"]["size"] > 5000000) {
+            Session::addFlash("error", "L'image est trop volumineuse (max 5 Mo).");
+            $uploadOk = 0;
+        }
+
+        // Vérification du format de fichier
+        $allowedFormats = ["jpg", "jpeg", "png", "gif"];
+        if (!in_array($imageFileType, $allowedFormats)) {
+            Session::addFlash("error", "Formats acceptés : JPG, JPEG, PNG, GIF.");
+            $uploadOk = 0;
+        }
+        // Déplacement du fichier si tout est OK
+        if ($uploadOk && !move_uploaded_file($_FILES["avatar"]["tmp_name"], $targetFile)) {
+            Session::addFlash("error", "Erreur lors de l'upload de l'image.");
+            $this->redirectTo("forum", "blibliostar");
         }
         $data = [
             "email" => $email,
             "pseudo" => $pseudo,
             "password" => $pass,
-            "role" => $role
+            "role" => $role,
+            "avatar" => $targetFile
         ];
         
         $a = $userManager->add($data);
+        var_dump($a);die;
         
         Session::addFlash("success", "Inscription réussi ou compte déjà crée");
         header("Location: index.php"); // pour retrouner a la page d'acceuil

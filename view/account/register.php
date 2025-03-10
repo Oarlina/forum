@@ -1,4 +1,4 @@
-<form action="index.php?ctrl=security&action=register_BDD" method="post">
+<form action="index.php?ctrl=security&action=register_BDD" method="post" enctype="multipart/form-data">
     <label for="pseudo">Votre pseudo: </label><br>
     <input type="text" name="pseudo"><br>
 
@@ -10,6 +10,9 @@
 
     <label for="password2">Confirmer votre mot de passe: </label><br>
     <input type="password" name="password2" id="registerTwo"><i class="fa-solid fa-eye" onclick="changeInput('registerTwo')"></i><br>
+
+    <label for="">Entrer l'image de votre avatar: </label>
+    <input type="file" name="avatar" accept="image/*"> <br>
 
     <input type="checkbox" name="valider"> 
     <label for="">En cliquant sur S’inscrire, vous acceptez nos Conditions d’utilisation. Consultez notre 
