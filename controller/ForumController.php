@@ -380,7 +380,60 @@ class ForumController extends AbstractController implements ControllerInterface{
         $this->redirectTo("forum", "index");
     }
 
+    public function topicBookForm($id_book){
+        $bookManager = new BookManager();
+        $book = $bookManager->findOneById($id_book);
+        $cbManager = new CategoryBookManager();
+        $cb = $cbManager->findCategoryByBook($id_book);
+        return [
+            "view" => VIEW_DIR."addForm/addTopicBook.php",
+            "meta_description" => "Formulaire d'un topic : ",
+            "data" => ["book" => $book,
+                        "cb" => $cb]
+        ];
+    }
 
+    public function topicBookBDD($id_book){
+        // var_dump($_POST);die;
+        if (!isset($_POST['submit'])) {
+            $this->redirectTo("forum", "listTopicsByCategory",$id_category); // /!\ apres un return la fonction se termine directement /!\
+        }
+        $cat = filter_input(INPUT_POST, "category", FILTER_SANITIZE_SPECIAL_CHARS);
+        $title = filter_input(INPUT_POST, "title", FILTER_SANITIZE_SPECIAL_CHARS);
+        $first_post = filter_input(INPUT_POST, "first_post", FILTER_SANITIZE_SPECIAL_CHARS);
+
+        // je verifie que le titre et le premier messga n'est pas vide
+        if (empty($title) || empty($first_post) || empty($cat)){ // si le title est vide
+            Session::addFlash('error','Veuillez remplir tous les champs');
+            $this->redirectTo("forum", "listTopicsByCategory",$id_category);
+        }
+
+        $topicManager = new TopicManager();
+        $isLock = 0;
+        $userManager = new UserManager();
+        $user = $userManager->findOneById(Session::getUser()->getId());
+        
+        // on ajoute un post sur le livre
+        $data = [
+            "title" => $title,
+            "isLock" => $isLock,
+            "category_id" => $cat,
+            "user_id" => $user->getId(),
+            "book_id" => $id_book
+        ];
+        $topic = $topicManager->add($data); // je l'ajoute a ma bdd et en meme temps je reucpere l'id du topic
+
+
+        // on ajoute le premier post du topic
+        $postManager = new PostManager ();
+        // var_dump($topic); die;
+        $data = ["textPost" => $first_post,
+                 "user_id" => Session::getUser()->getId(),
+                 "topic_id" => $topic];
+        $post = $postManager->add($data);
+
+        $this->redirectTo("forum", "postsByTopics", $topic); // me renvoie sur le topic cree
+    }
 
 
     // ****************************************************************************** / Suppression  ******************************************************************************

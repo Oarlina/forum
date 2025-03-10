@@ -2,13 +2,13 @@
     <div class="left_box">
         <div class="forum">
             <a href="index.php?ctrl=Rule&action=Forum_rule">
-                <h3>Forum</h3>
+                <h3>Règlement</h3>
                 <p>Retrouvez-ici toutes les infos du forum et accéder directement à la FAQ pour éclaircir vos doutes.</p>
             </a>
         </div>
         <div class="reading">
         <a href="index.php?ctrl=forum&action=index">
-            <h3>Lecture</h3>
+            <h3>Forum</h3>
             <p>Plongez dans ce bloc pour explorer une variété de genres de lecture et trouver celui qui vous passionne le plus.</p>
         </a>
         </div>

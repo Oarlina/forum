@@ -22,4 +22,5 @@
             </div>
         </div>
     </div>
+    <a href="index.php?ctrl=forum&action=topicBookForm&id=<?= $book->getId()?>"><button>Ajouter un topic</button></a>
 </section>
