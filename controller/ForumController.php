@@ -152,13 +152,14 @@ class ForumController extends AbstractController implements ControllerInterface{
             $textPost = filter_input(INPUT_POST,"text",FILTER_SANITIZE_SPECIAL_CHARS);
             $topicManager = new TopicManager();
             $topic = $topicManager->findOneById($id);
-
+            $user = Session::getUser();
+            // var_dump($user);die;
             if ($textPost){
 
                 $postManager = new PostManager();
                 $postManager->add([
                     "textPost" => $textPost,
-                    "user_id" => 1,
+                    "user_id" => $user->getId(),
                     "topic_id" => $topic->getId()
                 ]);
             }

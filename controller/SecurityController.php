@@ -91,8 +91,7 @@ class SecurityController extends AbstractController{
         // on recupere l'utilisateur
         $userManager = new UserManager();
         $user = $userManager->findOneByEmail($email);
-        // var_dump ($user->getPassword()); die;
-        if (isset($user)){
+        if ($user == null){
             Session::addFlash("error", "Compte inexistant");
             $this->redirectTo("index");
         }

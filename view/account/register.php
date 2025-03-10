@@ -6,10 +6,10 @@
     <input type="mail" name="email"><br>
 
     <label for="password">Votre mot de passe: </label><br>
-    <input type="password" name="password"><br>
+    <input type="password" name="password" id="registerOne"><i class="fa-solid fa-eye" onclick="changeInput('registerOne')"></i><br>
 
     <label for="password2">Confirmer votre mot de passe: </label><br>
-    <input type="password" name="password2"><br>
+    <input type="password" name="password2" id="registerTwo"><i class="fa-solid fa-eye" onclick="changeInput('registerTwo')"></i><br>
 
     <input type="checkbox" name="valider"> 
     <label for="">En cliquant sur S’inscrire, vous acceptez nos Conditions d’utilisation. Consultez notre 
