@@ -22,7 +22,7 @@ class ForumController extends AbstractController implements ControllerInterface{
         // créer une nouvelle instance de CategoryManager
         $categoryManager = new CategoryManager();
         // récupérer la liste de toutes les catégories grâce à la méthode findAll de Manager.php (triés par nom)
-        $categories = $categoryManager->findAll();
+        $categories = $categoryManager->findCategory();
         // le controller communique avec la vue "listCategories" (view) pour lui envoyer la liste des catégories (data)
         $topicsManager = new TopicManager();
         $topics = $topicsManager->findAll();
