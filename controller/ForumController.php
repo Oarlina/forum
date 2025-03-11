@@ -138,7 +138,7 @@ class ForumController extends AbstractController implements ControllerInterface{
     
     public function forum_rule (){
         return [
-            "view" => VIEW_DIR."Forum_rule/forum_rule.php",
+            "view" => VIEW_DIR."forum/Forum_rule/forum_rule.php",
             "meta_description" => "Compte : ",
             "data" => [
             ]
@@ -146,7 +146,7 @@ class ForumController extends AbstractController implements ControllerInterface{
     }
     public function charte (){
         return [
-            "view" => VIEW_DIR."Forum_rule/charte.php",
+            "view" => VIEW_DIR."forum/Forum_rule/charte.php",
             "meta_description" => "Charte : ",
             "data" => [
             ]
@@ -160,7 +160,7 @@ class ForumController extends AbstractController implements ControllerInterface{
         $topics = $topicsManager->findTopicsByCategory($category->getId());
 
         return [
-            "view" => VIEW_DIR."Forum_rule/tutos.php",
+            "view" => VIEW_DIR."forum/Forum_rule/tutos.php",
             "meta_description" => "Tutos : ",
             "data" => [
                 "category" => $category,
@@ -176,7 +176,7 @@ class ForumController extends AbstractController implements ControllerInterface{
         $topics = $topicsManager->findTopicsByCategory($category->getId());
 
         return [
-            "view" => VIEW_DIR."Forum_rule/foireAuxQuestions.php",
+            "view" => VIEW_DIR."forum/Forum_rule/foireAuxQuestions.php",
             "meta_description" => "FAQ : ",
             "data" => [
                 "category" => $category,
@@ -192,7 +192,7 @@ class ForumController extends AbstractController implements ControllerInterface{
         $postManager = new postManager();
         $posts = $postManager->findPostsByTopic($idTopic);
         return [
-            "view" => VIEW_DIR."forum_rule/postRule.php",
+            "view" => VIEW_DIR."forum/Forum_rule/postRule.php",
             "meta_description" => "Compte : ",
             "data" => [
                 "posts" => $posts,

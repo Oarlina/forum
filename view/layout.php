@@ -87,9 +87,9 @@
             </footer>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/@tinymce/tinymce-webcomponent@2/dist/tinymce-webcomponent.min.js"></script>
-        <tinymce-editor
+        <!-- <tinymce-editor
             api-key="ed2izf8mohn8kxt7o5d48jnx6s2y8sm70a3lsdewayu1fgjl">
-        </tinymce-editor>
+        </tinymce-editor> -->
         <script>
             $(document).ready(function(){
                 $(".message").each(function(){
