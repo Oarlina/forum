@@ -1,11 +1,21 @@
 <p><a href="index.php" class="oldpath"> Acceuil</a> > <a href="index.php?ctrl=rule&action=forum_rule" class="oldpath">Forum</a> > FAQ</p>
 
-<section class="faq">
+<?php 
+    $category = $result["data"]['category']; 
+    $topics = $result["data"]['topics']; 
+?>
 
-    <div class="po">Une demande, un bug, une suggestion? Contactez la team! </div>
-    <div class="po">Informations du forum</div>
-    <div class="po">Supprimer son compte: qu'est-ce que cela implique?</div>
-    <div class="po">Règles de titres, mots-clés et vignettes</div>
-    <div class="po">Rencontres et échanges</div>
+<section class="faq">
+    <?php if(App\Session::isAdmin()){?>
+            <a href="index.php?ctrl=forum&action=FaqReglementForm&id=<?= $category->getId()?>"><button>Ajouter un FAQ </button></a>  
+    <?php }
+    
+        if ($topics == null){
+            ?> <p>Aucun topic existant</p> <?php
+        }else {
+        foreach ($topics as $topic){
+            ?> <p><a href=""><?= $topic->getTitle() ?> </a></p>  <?php // j'affiche le topic de FAQ
+        } }
+    ?>
 
 </section>

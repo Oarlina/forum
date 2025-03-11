@@ -25,7 +25,7 @@ class ForumController extends AbstractController implements ControllerInterface{
         $categories = $categoryManager->findCategory();
         // le controller communique avec la vue "listCategories" (view) pour lui envoyer la liste des catégories (data)
         $topicsManager = new TopicManager();
-        $topics = $topicsManager->findAll();
+        $topics = $topicsManager->findTopicsWhereBook(); // je recupere les topics qui sont lier a un livre car j'ai des topic du faq et tutos qui ne sont pas lier a un livre
 
         $userManager = new userManager();
         $users = $userManager->findAll();
@@ -38,8 +38,7 @@ class ForumController extends AbstractController implements ControllerInterface{
             "data" => [
                 "categories" => $categories,
                 "topics" => $topics,
-                "users" => $users,
-                // "posts" => $posts
+                "users" => $users
             ]
         ];
     }
@@ -397,7 +396,7 @@ class ForumController extends AbstractController implements ControllerInterface{
     }
 
     public function topicBookBDD($id_book){
-        // var_dump($_POST);die;
+        
         if (!isset($_POST['submit'])) {
             $this->redirectTo("forum", "listTopicsByCategory",$id_category); // /!\ apres un return la fonction se termine directement /!\
         }
@@ -436,6 +435,80 @@ class ForumController extends AbstractController implements ControllerInterface{
         $post = $postManager->add($data);
 
         $this->redirectTo("forum", "postsByTopics", $topic); // me renvoie sur le topic cree
+    }
+
+    public function topicReglementForm($id_category){
+        return [
+            "view" => VIEW_DIR."addForm/addTopicReglement.php",
+            "meta_description" => "Formulaire de topic du règlement : ",
+            "data" => [
+                "category" => $id_category
+            ]
+        ];
+    }
+
+    public function topicReglementBDD($id_category){
+
+        if (!isset($_POST['submit'])) {
+            $this->redirectTo("rule", "forum_rule"); // /!\ apres un return la fonction se termine directement /!\
+        }
+        $title = filter_input(INPUT_POST, "title", FILTER_SANITIZE_SPECIAL_CHARS);
+
+        // je verifie que le titre et le premier messga n'est pas vide
+        if (empty($title)){ // si le title est vide
+            Session::addFlash('error','Veuillez remplir tous les champs');
+            $this->redirectTo("rule", "forum_rule");
+        }
+        $topicManager = new TopicManager();
+        $userManager = new UserManager();
+        $user = Session::getUser()->getId();
+        
+        $data = [
+            "title" => $title,
+            "isLock" => 1,
+            "category_id" => $id_category,
+            "user_id" => $user
+        ];
+
+        $topic = $topicManager->add($data);
+        $this->redirectTo("rule", "tutos");
+    }
+    public function FaqReglementForm($id_category){
+        return [
+            "view" => VIEW_DIR."addForm/addFaqReglement.php",
+            "meta_description" => "Formulaire de topic du règlement : ",
+            "data" => [
+                "category" => $id_category
+            ]
+        ];
+    }
+
+    public function FaqReglementBDD($id_category){
+
+        if (!isset($_POST['submit'])) {
+            $this->redirectTo("rule", "foireAuxQuestions"); // /!\ apres un return la fonction se termine directement /!\
+        }
+        $title = filter_input(INPUT_POST, "title", FILTER_SANITIZE_SPECIAL_CHARS);
+
+        // je verifie que le titre et le premier messga n'est pas vide
+        if (empty($title)){ // si le title est vide
+            Session::addFlash('error','Veuillez remplir tous les champs');
+            $this->redirectTo("rule", "foireAuxQuestions");
+        }
+        $userManager = new UserManager();
+        $user = Session::getUser()->getId();
+        
+        $data = [
+            "title" => $title,
+            "isLock" => 1,
+            "category_id" => $id_category,
+            "user_id" => $user
+        ];
+
+        $topicManager = new TopicManager();
+        $topic = $topicManager->add($data);
+        
+        $this->redirectTo("rule", "foireAuxQuestions");
     }
 
 

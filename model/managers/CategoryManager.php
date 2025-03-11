@@ -43,6 +43,13 @@ class CategoryManager extends Manager{
         return $sql;
     }
     
+    public function findOneByName($nameCat){
+        $sql = "SELECT * FROM ". $this->tableName." WHERE typeCategory = :nameCat";
+        return $this->getOneOrNullResult(
+            DAO::select($sql, ["nameCat" => $nameCat], false), 
+            $this->className
+        );
+    }
 
 
 

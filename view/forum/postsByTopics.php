@@ -17,6 +17,7 @@
     <?= $topic->getTitle()?>
 </p>
 <h1 class="title"><?=$topic->getTitle()?></h1>
+<?php if ($book != null) {?>
 <section class="book">
     <div class="oneBook">
         <p class="title"><b> <?= $book->getTitle() ?> </b></p>
@@ -32,6 +33,7 @@
         </div>
     </div>
 </section>
+<?php } ?>
 <section class="firstPost">
 <h1><?= $firstPost->getTextPost()?></h1>
         <p><u>Createur du post :</u> <?=$pseudoFp?></p>

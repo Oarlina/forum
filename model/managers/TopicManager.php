@@ -48,4 +48,13 @@ class TopicManager extends Manager{
             $this->className
         );
     }
+    public function findTopicsWhereBook(){
+        $sql = "SELECT * FROM ".$this->tableName." t WHERE t.book_id != 'null'";
+       
+        // la requête renvoie plusieurs enregistrements --> getMultipleResults
+        return  $this->getMultipleResults(
+            DAO::select($sql, []), 
+            $this->className
+        );
+    }
 }

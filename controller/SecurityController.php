@@ -19,7 +19,7 @@ class SecurityController extends AbstractController{
     }
 
     public function register_BDD(){
-        // var_dump($_POST);
+        
         if (isset($_POST['submit']))
         {
             $this->redirectTo("security", "register");
@@ -101,7 +101,6 @@ class SecurityController extends AbstractController{
         ];
         
         $a = $userManager->add($data);
-        var_dump($a);die;
         
         Session::addFlash("success", "Inscription réussi ou compte déjà crée");
         header("Location: index.php"); // pour retrouner a la page d'acceuil
@@ -122,8 +121,7 @@ class SecurityController extends AbstractController{
         // on filtre les variables
         $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_SPECIAL_CHARS, FILTER_VALIDATE_EMAIL);
         $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_SPECIAL_CHARS);
-        // var_dump($email, $password);die;
-        
+
         // on verifie si le mail et le mot de passe sont donner
         if ($email == null && $password == null) {
             Session::addFlash("success", "Formulaire incomplet");
