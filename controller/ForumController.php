@@ -92,13 +92,21 @@ class ForumController extends AbstractController implements ControllerInterface{
     public function postsByTopics ($idTopic){
         $topicManager = new TopicManager();
         $topic = $topicManager->findOneById($idTopic);
+        $topics = $topicManager->findTopicsByCategory($topic->getCategory()->getId());
 
         $bookManager = new bookManager;
-        $book = $bookManager->findoneById($topic->getBook()->getId());
+        if ($topic->getBook()!= null){ // si le post est pour le reglement (FAQ ou tuto) alors il n'est pas lier a un livre
+            $book = $bookManager->findoneById($topic->getBook()->getId());
+        } else {
+            $book = null;
+        }
 
         $postManager = new postManager();
         $firstPost = $postManager->findFirstPost($idTopic);
         $posts = $postManager->findOtherPost($idTopic, $firstPost->getId());
+        if ($topic->getCategory()->getId() == 10 || $topic->getCategory()->getId() == 12){ // je prend la possibilite que le post a ete creer pour aller dans le reglement (FAQ, ou tuto)
+            $this->redirectTo("forum","postsByTopicsRule", $topic->getId());
+        }
         return [
             "view" => VIEW_DIR."forum/postsByTopics.php",
             "meta_description" => "Compte : ",
@@ -128,7 +136,70 @@ class ForumController extends AbstractController implements ControllerInterface{
         ];
     }
     
+    public function forum_rule (){
+        return [
+            "view" => VIEW_DIR."Forum_rule/forum_rule.php",
+            "meta_description" => "Compte : ",
+            "data" => [
+            ]
+        ];
+    }
+    public function charte (){
+        return [
+            "view" => VIEW_DIR."Forum_rule/charte.php",
+            "meta_description" => "Charte : ",
+            "data" => [
+            ]
+        ];
+    }
+    public function tutos (){
+        $categorymanager = new CategoryManager();
+        $category = $categorymanager->findOneByName("Tutos");
 
+        $topicsManager = new TopicManager();
+        $topics = $topicsManager->findTopicsByCategory($category->getId());
+
+        return [
+            "view" => VIEW_DIR."Forum_rule/tutos.php",
+            "meta_description" => "Tutos : ",
+            "data" => [
+                "category" => $category,
+                "topics" => $topics
+            ]
+        ];
+    }
+    public function FAQ (){
+        $categorymanager = new CategoryManager();
+        $category = $categorymanager->findOneByName("FAQ");
+
+        $topicsManager = new TopicManager();
+        $topics = $topicsManager->findTopicsByCategory($category->getId());
+
+        return [
+            "view" => VIEW_DIR."Forum_rule/foireAuxQuestions.php",
+            "meta_description" => "FAQ : ",
+            "data" => [
+                "category" => $category,
+                "topics" => $topics
+            ]
+        ];
+    }
+    // il affiche un seul post
+    public function postsByTopicsRule ($idTopic){
+        $topicManager = new TopicManager();
+        $topic = $topicManager->findOneById($idTopic);
+
+        $postManager = new postManager();
+        $posts = $postManager->findPostsByTopic($idTopic);
+        return [
+            "view" => VIEW_DIR."forum_rule/postRule.php",
+            "meta_description" => "Compte : ",
+            "data" => [
+                "posts" => $posts,
+                "topic" => $topic
+            ]
+        ];
+    }
 
 
     // ****************************************************************************** / Page des formulaires ******************************************************************************
@@ -486,14 +557,14 @@ class ForumController extends AbstractController implements ControllerInterface{
     public function FaqReglementBDD($id_category){
 
         if (!isset($_POST['submit'])) {
-            $this->redirectTo("rule", "foireAuxQuestions"); // /!\ apres un return la fonction se termine directement /!\
+            $this->redirectTo("rule", "FAQ"); // /!\ apres un return la fonction se termine directement /!\
         }
         $title = filter_input(INPUT_POST, "title", FILTER_SANITIZE_SPECIAL_CHARS);
 
         // je verifie que le titre et le premier messga n'est pas vide
         if (empty($title)){ // si le title est vide
             Session::addFlash('error','Veuillez remplir tous les champs');
-            $this->redirectTo("rule", "foireAuxQuestions");
+            $this->redirectTo("rule", "FAQ");
         }
         $userManager = new UserManager();
         $user = Session::getUser()->getId();
@@ -508,7 +579,7 @@ class ForumController extends AbstractController implements ControllerInterface{
         $topicManager = new TopicManager();
         $topic = $topicManager->add($data);
         
-        $this->redirectTo("rule", "foireAuxQuestions");
+        $this->redirectTo("rule", "FAQ");
     }
 
 

@@ -1,4 +1,4 @@
-<p><a href="index.php" class="oldpath"> Acceuil</a> > <a href="index.php?ctrl=rule&action=forum_rule" class="oldpath">Forum</a> > Tutos</p>
+<p><a href="index.php" class="oldpath"> Acceuil</a> > <a href="index.php?ctrl=forum&action=forum_rule" class="oldpath">Forum</a> > Tutos</p>
 
 <?php 
     $category = $result["data"]['category']; 
@@ -15,7 +15,7 @@
         ?> <p>Aucun topic existant</p> <?php
     }else {
         foreach ($topics as $topic){
-            ?> <p><a href="index.php?ctrl="><?= $topic->getTitle() ?> </a></p>  <?php // j'affiche le topic de tuto
+            ?> <p><a href="index.php?ctrl=forum&action=postsByTopicsRule&id=<?= $topic->getId() ?>"><?= $topic->getTitle() ?> </a></p>  <?php // j'affiche le topic de tuto
         } 
     }
     ?>

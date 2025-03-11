@@ -1,4 +1,4 @@
-<p><a href="index.php" class="oldpath"> Acceuil</a> > <a href="index.php?ctrl=rule&action=Forum_rule" class="oldpath">Forum</a> > Charte du forum</p>
+<p><a href="index.php" class="oldpath"> Acceuil</a> > <a href="index.php?ctrl=forum&action=Forum_rule" class="oldpath">Forum</a> > Charte du forum</p>
 <section class="charte">
     <div class="left">
         <a href="">Limites de responsabilité</a><br>
