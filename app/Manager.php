@@ -6,7 +6,6 @@ abstract class Manager{
     protected function connect(){
         DAO::connect();
     }
-
     /**
      * get all the records of a table, sorted by optionnal field and order
      * 
@@ -18,17 +17,14 @@ abstract class Manager{
         $orderQuery = ($order) ?                 
             "ORDER BY ".$order[0]. " ".$order[1] :
             "";
-
         $sql = "SELECT *
                 FROM ".$this->tableName." a
                 ".$orderQuery;
-
         return $this->getMultipleResults(
             DAO::select($sql), 
             $this->className
         );
     }
-    
     public function findOneById($id){
 
         $sql = "SELECT *
@@ -41,9 +37,7 @@ abstract class Manager{
             $this->className
         );
     }
-
-    //$data = ['username' => 'Squalli', 'password' => 'dfsyfshfbzeifbqefbq', 'email' => 'sql@gmail.com'];
-
+ //$data = ['username' => 'Squalli', 'password' => 'dfsyfshfbzeifbqefbq', 'email' => 'sql@gmail.com'];
     public function add($data){
         //$keys = ['username' , 'password', 'email']
         $keys = array_keys($data);
@@ -65,8 +59,7 @@ abstract class Manager{
             echo $e->getMessage();
             die();
         }
-    }
-    
+    }  
     public function delete($id){
         $sql = "DELETE FROM ".$this->tableName."
                 WHERE id_".$this->tableName." = :id
@@ -74,13 +67,11 @@ abstract class Manager{
 
         return DAO::delete($sql, ['id' => $id]); 
     }
-
     private function generate($rows, $class){
         foreach($rows as $row){
             yield new $class($row);
         }
     }
-    
     protected function getMultipleResults($rows, $class){
 
         if(is_iterable($rows)){
@@ -88,7 +79,6 @@ abstract class Manager{
         }
         else return null;
     }
-
     protected function getOneOrNullResult($row, $class){
 
         if($row != null){
@@ -96,7 +86,6 @@ abstract class Manager{
         }
         return false;
     }
-
     protected function getSingleScalarResult($row){
 
         if($row != null){

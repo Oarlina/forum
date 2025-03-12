@@ -2,9 +2,7 @@
 namespace App;
 
 abstract class Entity{
-
     protected function hydrate($data){
-
         foreach($data as $field => $value){
             // field = topic_id
             // fieldarray = ['topic','id']
@@ -21,10 +19,8 @@ abstract class Entity{
                 // value = Model\Managers\TopicManager->findOneById(1)
                 $value = $man->findOneById($value);
             }
-
             // fabrication du nom du setter à appeler (ex: setName)
             $method = "set".ucfirst($fieldArray[0]);
-            
             // si setName est une méthode qui existe dans l'entité (this)
             if(method_exists($this, $method)){
                 // $this->setName("valeur")

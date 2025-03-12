@@ -17,8 +17,6 @@ abstract class DAO{
     private static $dbuser = 'root';
     private static $dbpass = '';
 
-    private static $bdd;
-
     /**
      * cette méthode permet de créer l'unique instance de PDO de l'application
      */
@@ -35,7 +33,6 @@ abstract class DAO{
             )   // on défini l'encodage puis on active le mode erreur en exeption et enfin 
         );
     }
-
     public static function insert($sql){
         try{
             $stmt = self::$bdd->prepare($sql);
@@ -49,7 +46,6 @@ abstract class DAO{
             echo $e->getMessage();
         }
     }
-
     public static function update($sql, $params){
         try{
             $stmt = self::$bdd->prepare($sql);
@@ -63,7 +59,6 @@ abstract class DAO{
             echo $e->getMessage();
         }
     }
-    
     public static function delete($sql, $params){
         try{
             $stmt = self::$bdd->prepare($sql);
@@ -78,7 +73,6 @@ abstract class DAO{
             die();
         }
     }
-
     /**
      * Cette méthode permet les requêtes de type SELECT
      * 
@@ -103,12 +97,4 @@ abstract class DAO{
             echo $e->getMessage();
         }
     }
-
-    // la fonction recupere la pdo et cherche le dernier id ajouter
-    public static function lastInsertId()
-    {
-        return self::$bdd->lastInsertId(); // on utilise self::... pour eviter de devoir reinstanicer la connexion a la bdd
-    }
-
-
 }

@@ -17,7 +17,7 @@
     <div class="oneBook">
         <p class="title"><b> <?= $book->getTitle() ?> </b></p>
         <div class="under">
-            <img src="public/img/books/<?= $book->getTitle() ?>" alt="couverture de <?= $book->getTitle() ?>">
+            <img src="<?= $book->getImg() ?>" alt="couverture de <?= $book->getTitle() ?>">
             <div class="right">
                 <p><u>Auteur :</u> <?= $book->getAuthor() ?></p>
                 <p><u>Editeur :</u> <?= $book->getEdition() ?></p>
@@ -44,7 +44,7 @@
     <?php 
     if ($posts != null){ 
     foreach($posts as $post){
-        if ($post->getUser()->getPseudo() == "Compte supprimé") { 
+        if ($post->getUser() == "Compte supprimé" || $post->getUser() == null) { 
             $pseudo = "Compte supprimé";
         } else {
             $pseudo = $post->getUser()->getPseudo();
