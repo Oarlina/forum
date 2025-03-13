@@ -16,7 +16,7 @@ abstract class DAO{
     private static $dbname = 'forum_marquant'; // nom de la base de donnée
     private static $dbuser = 'root';
     private static $dbpass = '';
-
+    private static $bdd;
     /**
      * cette méthode permet de créer l'unique instance de PDO de l'application
      */

@@ -23,17 +23,23 @@ class PostManager extends Manager{
     }
 
     public function findPostsByTopic ($idTopic){
-        $sql = "SELECT * FROM post WHERE topic_id =". $idTopic;
+        $sql = "SELECT * FROM post WHERE topic_id = :idTopic";
 
-        return $this->getMultipleResults(DAO::select($sql), $this->className);
+        return $this->getMultipleResults(
+            DAO::select($sql, 
+                        ["idTopic" => $idTopic]), 
+                        $this->className);
     }
 
     public function findFirstPost($idTopic){
-        $sql = "SELECT * FROM ". $this->tableName. " WHERE topic_id = :idTopic ORDER BY datePost ASC LIMIT 1";
+        $sql = "SELECT * FROM ". $this->tableName. " 
+            WHERE topic_id = :idTopic 
+            ORDER BY datePost ASC 
+            LIMIT 1";
         return $this->getOneOrNullResult(
-            DAO::select($sql, ["idTopic" => $idTopic], false), 
-            $this->className
-        );
+            DAO::select($sql, 
+                        ["idTopic" => $idTopic], false), 
+                        $this->className);
     }
 
     public function findOtherPost ($idTopic, $idFirstPost){

@@ -30,7 +30,6 @@ final class post extends Entity{
     public function setId($id)
     {
         $this->id = $id;
-
         return $this;
     }
 
