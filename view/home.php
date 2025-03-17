@@ -25,7 +25,9 @@
             </a>
         </div>
         <div class="account">
-            <a href="index.php?ctrl=forum&action=user_account&id=4">
+            <?php if(App\Session::getUser()){ ?>
+            <a href="index.php?ctrl=forum&action=user_account&id=<?= App\Session::getUser()->getId() ?>">
+             <?php }?>
                 <h3>Compte</h3>
                 <p>Retrouvez ici votre compte avec vos lectures et discussions.</p>
             </a>

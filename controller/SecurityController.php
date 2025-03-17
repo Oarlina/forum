@@ -38,7 +38,7 @@ class SecurityController extends AbstractController{
 
         // on verifie si les mots de passes sont different et s'il font au moins 12 caractere
         if ($password != $password2 || strlen($password)<12){
-            Session::addFlash("error", "Problème dans l'inscription, recommencez !");
+            Session::addFlash("error", "Mot de passe invalide !");
             $this->redirectTo("security", "register");
         }
 
@@ -140,7 +140,7 @@ class SecurityController extends AbstractController{
             $_SESSION["user"] = $user; // on lance la session d'un utilisateur dans session
         }else {
             Session::addFlash("error", "Email ou mot de passe invalide");
-            $this->redirectTo("forum", "user_account");
+            $this->redirectTo("index");
         }
         Session::addFlash("success", "Bienvenue!");
         $this->redirectTo("index");

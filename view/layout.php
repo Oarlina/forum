@@ -23,20 +23,21 @@
                                 <img src="public/img/logo.png" alt="Logo" class="logo_header">
                                 <img src="public/img/logo_nom.png" alt="Sunstar">
                             </a>
+                            <a href="" ><i class="fa-solid fa-bars"></i> </a>
                         </div>
                         <div class="left_nav"> <!-- ceci est la future barre de recherche -->
                             <div class="search">
                                 <p>Search...</p>
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </div>
-                            <?php if(App\Session::isAdmin()){ ?>
-                                <a href="index.php?ctrl=home&action=users">Voir la liste des gens</a>
-                            <?php } ?>
                         </div>
                         <div class="right_nav"> <!-- ici c'est soit les boutons se connecter/ s'inscrire soit le compte et le bouton se déconnecter -->
+                            <?php if(App\Session::isAdmin()){ ?>
+                                <a href="index.php?ctrl=home&action=users"><i class="fa-solid fa-users"></i></a>
+                            <?php } ?>
                         <?php // si l'utilisateur est connecté 
                             if(App\Session::getUser()){ ?>
-                                <a href="index.php?ctrl=forum&action=user_account"><span class="fas fa-user"></span>&nbsp;<?= App\Session::getUser()?></a>
+                                <a href="index.php?ctrl=forum&action=user_account"><span class="fas fa-user"></span></a>
                                 <div class="button_conexion_inscritption">
                                     <a href="index.php?ctrl=security&action=logout">Déconnexion</a>
                                 </div>
@@ -80,9 +81,10 @@
 
         </div>
         <script src="https://cdn.jsdelivr.net/npm/@tinymce/tinymce-webcomponent@2/dist/tinymce-webcomponent.min.js"></script>
-        <!-- <tinymce-editor
+        <tinymce-editor
             api-key="ed2izf8mohn8kxt7o5d48jnx6s2y8sm70a3lsdewayu1fgjl">
-        </tinymce-editor> -->
+        </tinymce-editor>
+        
         <script>
             $(document).ready(function(){
                 $(".message").each(function(){

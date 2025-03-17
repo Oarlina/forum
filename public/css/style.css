@@ -48,18 +48,20 @@ body{
             height: fit-content;
             margin: 8px 0 ;
         }
+        /* pour les chemins précedent du chemin de la page*/
         .oldpath{
             color: blue;
         }
+        /* pour que le coeur dans les messages soit petit */
         .heartMessage{
             height: 16px;
             width: 16px;
         }
-        
+        /* c'est ma page d'acceuil avec le menu bento */
         .home_box{
             margin: 10px auto;
             height: 77.5vh;
-            width: 80%;
+            width: 90%;
             display: flex;
             flex-direction: row;
             text-align: center;
@@ -121,10 +123,11 @@ body{
                 }
             }
         }
-    
+        /* c'est ma page ou j'affiche tous les topics*/
         .listTopics{
             display: flex;
             flex-direction: row;
+            /* j'affiche toutes les categories*/
             .left{
                 margin: 5px 5px 0 0;
                 height: fit-content;
@@ -137,6 +140,7 @@ body{
                     margin: 0 10px;
                 }
             }
+            /* j'affiche tous les topics*/
             .right{
                 width: 80%;
                 height: fit-content;
@@ -181,7 +185,7 @@ body{
                 }
             }
         }
-    
+        /* c'est la page d'une category ou j'affiche tous ces topics*/
         .detailCategory{
             .onePost{
                 background-color: #f6f6f6;
@@ -198,7 +202,7 @@ body{
                 }
             }
         }
-    
+        /* c'est la page d'un utilisateur */
         .user_account{
             height: 78vh;
             display: flex;
@@ -240,21 +244,8 @@ body{
                 background-color: #f6f6f6;
             }
         }
-    
-        .charte{
-            width: 100%;
-            display: flex;
-            flex-direction: row;
-            .left{
-                width: 10%;
-                margin: 5px;
-            }
-            .right{
-                width: 85%;
-                padding: 10px;
-            }
-        }
-    
+        
+        /* page de la blibliothèque de tous les livres du site*/
         .blibliostar{
             display: flex;
             flex-direction: row;
@@ -272,7 +263,7 @@ body{
                 }
             }
         }
-    
+        /* page d'un livre */
         .book{
             justify-items: center;/* pour centrer la div a l'interieur*/
             width: 100%;
@@ -307,7 +298,21 @@ body{
                 }
             }
         }
-
+        /* page du reglement de la charte du site */
+        .charte{
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            .left{
+                width: 10%;
+                margin: 5px;
+            }
+            .right{
+                width: 85%;
+                padding: 10px;
+            }
+        }
+        /* liens du footer*/
         .politiqueConfidentialite, .cookies{
             ol li {
                 margin: 5px 20px;
@@ -325,14 +330,17 @@ body{
         align-items: center;
         .logo_title{
             height: 100%;
-            width: 25%;
+            width: 20%;
             display: flex;
             flex-direction: row;
+            flex-wrap: nowrap;
             align-items: center;
             img{
-                height: 40px;
+                height: 35px;
             }
-            
+            .fa-bars{
+                display: none;
+            }
         }
         .left_nav{
             width: 35%;
@@ -366,7 +374,7 @@ body{
     }
     footer{
         width: 100%;
-        height: 15vh;
+        height: fit-content;
         background-color: rgb(238, 238, 238);
         .top_footer{
             height: 45%;
@@ -394,8 +402,12 @@ body{
             }
         }
     }
+    /* pour eviter d'avoir un bloc pour ecrire du texte*/
+    tinymce-editor{ 
+        display: none;
+    }
 
-    /*------------------------------- Les formulaires --------------------------------*/
+    /*------------------------------- Les pages des formulaires --------------------------------*/
 
     .add{
         margin: 10px;
@@ -433,5 +445,115 @@ body{
             margin: 0 0 0 10px;
             padding: 3px 15px;
         }
+    }
+}
+
+/* pour les tablettes*/
+@media screen and (min-width: 769px) and (max-width:1024px){
+    body{
+        nav{
+            .logo_title{
+                width: 20%;
+            }
+            .left_nav{
+                width: 45%;
+            }
+        }
+        #forum{
+            .home_box{
+                height: 100vh;
+                flex-direction: column !important; 
+                width: fit-content;
+                .left_box, .right_box{
+                    width: 100%;
+                    height: 49vh;
+                    margin: 10px 0 ;
+                    display: flex;
+                    flex-direction: row;
+                    .reading, .forum, .blibliostar, .account {
+                        height: 100%;
+                        width: 50%;
+                    }
+                }
+                .community{
+                    width: 100%;
+                    margin: 10px 0;
+                }
+            }
+
+        }
+
+        footer{
+        .top_footer{
+            display: flex;
+            flex-direction: column;
+            a{
+                padding: 10px 0;
+            }
+        }
+        .bottom_footer{
+            height: 45%;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            p{
+                margin: 10px 0;
+            }
+            .reseaux{
+                a{
+                    margin: 5px 15px;
+                }
+            }
+        }
+        }
+    }
+}
+
+/* pour les téléphones */
+@media screen and (max-width: 768px) {
+    body{
+        nav{
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            .logo_title{
+                width: fit-content;
+                img{
+                    height: 30px;
+                }
+                .fa-bars{
+                    display: block;
+                    margin: 0 15px;
+                }
+            }
+            .left_nav, .right_nav{
+                display: none;
+                margin: 5px 0;
+            }
+        }
+
+        footer{
+            .top_footer{
+                display: flex;
+                flex-direction: column;
+                a{
+                    padding: 10px 0;
+                }
+            }
+            .bottom_footer{
+                height: 45%;
+                display: flex;
+                flex-direction: column;
+                text-align: center;
+                p{
+                    margin: 10px 0;
+                }
+                .reseaux{
+                    a{
+                        margin: 5px 15px;
+                    }
+                }
+            }
+            }
     }
 }
