@@ -66,9 +66,32 @@ class ForumController extends AbstractController implements ControllerInterface{
         ];
     }
 
+    public function politiqueConfidentialite (){
+        return [
+            "view" => VIEW_DIR."forum/footer/politique_de_confidentialite.php",
+            "meta_description" => "Liste des catégories du forum",
+            "data" => [ ]
+        ];
+    }
+    public function cookies (){
+        return [
+            "view" => VIEW_DIR."forum/footer/cookies.php",
+            "meta_description" => "Liste des catégories du forum",
+            "data" => [ ]
+        ];
+    }
+    public function nous_soutenir (){
+        return [
+            "view" => VIEW_DIR."forum/footer/nous_soutenir.php",
+            "meta_description" => "Liste des catégories du forum",
+            "data" => [ ]
+        ];
+    }
+    public function contact (){
+        $this->redirectTo("forum","FAQ");
+    }
 
-
-    // ****************************************************************************** / Page des principales ******************************************************************************
+    // ****************************************************************************** / Page secondaires ******************************************************************************
 
     // affiche les topics pour UNE catégorie
     public function listTopicsByCategory($id) {
@@ -93,9 +116,9 @@ class ForumController extends AbstractController implements ControllerInterface{
         $topicManager = new TopicManager();
         $topic = $topicManager->findOneById($idTopic);
         $topics = $topicManager->findTopicsByCategory($topic->getCategory()->getId());
-
         $bookManager = new bookManager;
-        if ($topic->getBook()!= null){ // si le post est pour le reglement (FAQ ou tuto) alors il n'est pas lier a un livre
+        // si le post est pour le reglement (FAQ ou tuto) alors il n'est pas lier a un livre    
+        if ($topic->getBook()!= null){ 
             $book = $bookManager->findoneById($topic->getBook()->getId());
         } else {
             $book = null;

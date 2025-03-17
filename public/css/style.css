@@ -11,23 +11,6 @@ h1 {
 /* CSS du layout */
 body{
     width: 100%;
-    #forum{
-        margin: 10px;
-        .title{
-            text-align: center;
-        }
-        .firstPost{
-            background-color: #f6f6f6;
-            width: 100%;
-            height: fit-content;
-        }
-        .top{
-            background-color: #f2f2f2;
-            width: 100%;
-            height: fit-content;
-            margin: 8px 0 ;
-        }
-    }
     button{
         border-radius: 5px;
         padding: 0 5px;
@@ -49,13 +32,289 @@ body{
     a:hover{
         color: #3700ff;
     }
-    .oldpath{
-        color: blue;
+    #forum{
+        margin: 10px;
+        .title{
+            text-align: center;
+        }
+        .firstPost{
+            background-color: #f6f6f6;
+            width: 100%;
+            height: fit-content;
+        }
+        .top{
+            background-color: #f2f2f2;
+            width: 100%;
+            height: fit-content;
+            margin: 8px 0 ;
+        }
+        .oldpath{
+            color: blue;
+        }
+        .heartMessage{
+            height: 16px;
+            width: 16px;
+        }
+        
+        .home_box{
+            margin: 10px auto;
+            height: 77.5vh;
+            width: 80%;
+            display: flex;
+            flex-direction: row;
+            text-align: center;
+            .left_box, .right_box{
+                width: 30%;
+                height: 100%;
+                .forum, .account, .reading, .blibliostar {
+                    margin: 10px;
+                    border-radius: 15%;
+                    width: 95%;
+                    height: 48%;
+                    
+                }
+                .forum, .account{
+                    background: url('../img/home/rose.png'), #ffb3c0;
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    background-position: center;
+    
+                }
+                .reading, .blibliostar{
+                    background: url('../img/home/jaune.png'), #fffbb2;
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    background-position: center;
+                }
+            }
+            /* pour pouvoir tourner le background-image*/
+            .community::before{
+                content: "";
+                display: block;
+                height: 100%;
+                width: 100%;
+                background-image: url('../img/home/bleu.png');
+                background-size: cover;
+                background-position: center;
+                border-radius: 0 0 10% 0; /* en bas a droite, en bas a gauche, en haut a gauche, en haut a droite*/
+                transform: rotate(180deg);
+            }
+            .community{
+                margin: 10px 20px;
+                border-radius: 10%;
+                padding: 10px;
+                width: 36%;
+                height: 98%;
+                background-color: #B3E9FF;
+                
+            }
+            /* on agis sur toutes les cases qui deviendront des liens*/
+            .community, .left_box .forum, .left_box .reading, .right_box .blibliostar, .right_box .account{
+                display: flex;
+                flex-direction: column;
+                justify-content: end;
+                p, h3{
+                    padding: 15px;
+                }
+                h3{
+                    padding-left: 15px;
+                }
+            }
+        }
+    
+        .listTopics{
+            display: flex;
+            flex-direction: row;
+            .left{
+                margin: 5px 5px 0 0;
+                height: fit-content;
+                width: fit-content;
+                padding: 0.5rem;
+                background-color: rgb(241, 241, 241);
+                .top{ /* ceci est le petit plus dans les categories*/
+                    text-align: end;
+                    scale: 1.2;
+                    margin: 0 10px;
+                }
+            }
+            .right{
+                width: 80%;
+                height: fit-content;
+                .onePost{
+                    background-color: #f6f6f6;
+                    margin: 5px;
+                    height: fit-content;
+                    display: flex;
+                    flex-direction: row;
+                    .bookPost{
+                        width: 10%;
+                        height: fit-content;
+                    }
+                    .rightPost{
+                        width: 75%;
+                    }
+                }
+            }
+        }
+    
+        .listPosts{
+            .left{
+                width: 100%;
+                .onePost{
+                    width: 100%;
+                    background-color: #faccd3;
+                    margin: 10px;
+                    .date{
+                         font-size: small;
+                    }
+                    .i::before{
+                        height: 30px;
+                        width: 30px;
+                    }
+                    i{
+                        height: 30px;
+                        width: 30px;
+                    }
+                    img{
+                        height: 25px;
+                    }
+                }
+            }
+        }
+    
+        .detailCategory{
+            .onePost{
+                background-color: #f6f6f6;
+                margin: 5px;
+                height: fit-content;
+                display: flex;
+                flex-direction: row;
+                .bookPost{
+                    width: 10%;
+                    height: fit-content;
+                }
+                .rightPost{
+                    width: 75%;
+                }
+            }
+        }
+    
+        .user_account{
+            height: 78vh;
+            display: flex;
+            flex-direction: row;
+            .left{
+                margin: 10px 10px 0 0;
+                padding: 5px;
+                width: 10%;
+                height: fit-content;
+                background-color: #f6f6f6;
+                img{
+                    border-radius: 50%;
+                    object-fit: cover; /* permet de mettre l'image dans un bloc sans changer ses dimensions*/
+                    width: 180px;
+                    height: 180px;
+                }
+                h2{
+                    text-align: center;
+                }
+                hr{
+                    margin: 10px 0;
+                }
+            }
+            .right{
+                width: 90%;
+                height: fit-content;
+                padding: 10px;
+                display: flex;
+                flex-direction: column;
+                img{
+                    border-radius: 50%;
+                    object-fit: cover; /* permet de mettre l'image dans un bloc sans changer ses dimensions*/
+                    width: 180px;
+                    height: 180px;
+                }
+                button{
+                    width: fit-content
+                }
+                background-color: #f6f6f6;
+            }
+        }
+    
+        .charte{
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            .left{
+                width: 10%;
+                margin: 5px;
+            }
+            .right{
+                width: 85%;
+                padding: 10px;
+            }
+        }
+    
+        .blibliostar{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+            .book{
+                margin: 10px;
+                width: 300px;
+                height: 400px;
+                text-align: center;
+                img{
+                    height: 350px;
+                    width: 250px;
+                }
+            }
+        }
+    
+        .book{
+            justify-items: center;/* pour centrer la div a l'interieur*/
+            width: 100%;
+            .oneBook{
+                width: 90%;
+                height: fit-content;
+                background-color: #B3E9FF;
+                margin: 25px;
+                .title{
+                    font-size: larger;
+                    margin: 5px 10px;
+                }
+                .under{
+                    display: flex;
+                    flex-direction: row;
+                    width: 100%;
+                    img{
+                        width: 24%;
+                        height: fit-content;
+                        margin: 5px;
+                    }
+                    .right{
+                        width: 75%;
+                        padding: 5px;
+                        p{
+                            width: 100%;
+                            margin: 5px;
+                            height: fit-content;
+                            text-align: justify;
+                        }
+                    }
+                }
+            }
+        }
+
+        .politiqueConfidentialite, .cookies{
+            ol li {
+                margin: 5px 20px;
+            }
+        }
     }
-    .heartMessage{
-        height: 16px;
-        width: 16px;
-    }
+    
     nav{
         height: 5vh;
         width: 100%;
@@ -111,6 +370,8 @@ body{
         background-color: rgb(238, 238, 238);
         .top_footer{
             height: 45%;
+            width: 100%;
+            padding: 20px;
             /* pour centrer verticalement et horizontalement les ancres */
             text-align: center;
             align-content: center;
@@ -133,259 +394,6 @@ body{
             }
         }
     }
-    
-    .home_box{
-        margin: 10px auto;
-        height: 77.5vh;
-        width: 80%;
-        display: flex;
-        flex-direction: row;
-        text-align: center;
-        .left_box, .right_box{
-            width: 30%;
-            height: 100%;
-            .forum, .account, .reading, .blibliostar {
-                margin: 10px;
-                border-radius: 15%;
-                width: 95%;
-                height: 48%;
-                
-            }
-            .forum, .account{
-                background: url('../img/home/rose.png'), #ffb3c0;
-                background-repeat: no-repeat;
-                background-size: cover;
-                background-position: center;
-
-            }
-            .reading, .blibliostar{
-                background: url('../img/home/jaune.png'), #fffbb2;
-                background-repeat: no-repeat;
-                background-size: cover;
-                background-position: center;
-            }
-        }
-        /* pour pouvoir tourner le background-image*/
-        .community::before{
-            content: "";
-            display: block;
-            height: 100%;
-            width: 100%;
-            background-image: url('../img/home/bleu.png');
-            background-size: cover;
-            background-position: center;
-            border-radius: 0 0 10% 0; /* en bas a droite, en bas a gauche, en haut a gauche, en haut a droite*/
-            transform: rotate(180deg);
-        }
-        .community{
-            margin: 10px 20px;
-            border-radius: 10%;
-            padding: 10px;
-            width: 36%;
-            height: 98%;
-            background-color: #B3E9FF;
-            
-        }
-        /* on agis sur toutes les cases qui deviendront des liens*/
-        .community, .left_box .forum, .left_box .reading, .right_box .blibliostar, .right_box .account{
-            display: flex;
-            flex-direction: column;
-            justify-content: end;
-            p, h3{
-                padding: 15px;
-            }
-            h3{
-                padding-left: 15px;
-            }
-        }
-    }
-
-    .listTopics{
-        display: flex;
-        flex-direction: row;
-        .left{
-            margin: 5px 5px 0 0;
-            height: fit-content;
-            width: fit-content;
-            padding: 0.5rem;
-            background-color: rgb(241, 241, 241);
-            .top{ /* ceci est le petit plus dans les categories*/
-                text-align: end;
-                scale: 1.2;
-                margin: 0 10px;
-            }
-        }
-        .right{
-            width: 80%;
-            height: fit-content;
-            .onePost{
-                background-color: #f6f6f6;
-                margin: 5px;
-                height: fit-content;
-                display: flex;
-                flex-direction: row;
-                .bookPost{
-                    width: 10%;
-                    height: fit-content;
-                }
-                .rightPost{
-                    width: 75%;
-                }
-            }
-        }
-    }
-
-    .listPosts{
-        .left{
-            width: 100%;
-            .onePost{
-                width: 100%;
-                background-color: #faccd3;
-                margin: 10px;
-                .date{
-                     font-size: small;
-                }
-                .i::before{
-                    height: 30px;
-                    width: 30px;
-                }
-                i{
-                    height: 30px;
-                    width: 30px;
-                }
-                img{
-                    height: 25px;
-                }
-            }
-        }
-    }
-
-    .detailCategory{
-        .onePost{
-            background-color: #f6f6f6;
-            margin: 5px;
-            height: fit-content;
-            display: flex;
-            flex-direction: row;
-            .bookPost{
-                width: 10%;
-                height: fit-content;
-            }
-            .rightPost{
-                width: 75%;
-            }
-        }
-    }
-
-    .user_account{
-        height: 78vh;
-        display: flex;
-        flex-direction: row;
-        .left{
-            margin: 10px 10px 0 0;
-            padding: 5px;
-            width: 10%;
-            height: fit-content;
-            background-color: #f6f6f6;
-            img{
-                border-radius: 50%;
-                object-fit: cover; /* permet de mettre l'image dans un bloc sans changer ses dimensions*/
-                width: 180px;
-                height: 180px;
-            }
-            h2{
-                text-align: center;
-            }
-            hr{
-                margin: 10px 0;
-            }
-        }
-        .right{
-            width: 90%;
-            height: fit-content;
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-            img{
-                border-radius: 50%;
-                object-fit: cover; /* permet de mettre l'image dans un bloc sans changer ses dimensions*/
-                width: 180px;
-                height: 180px;
-            }
-            button{
-                width: fit-content
-            }
-            background-color: #f6f6f6;
-        }
-    }
-
-    .charte{
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        .left{
-            width: 10%;
-            margin: 5px;
-        }
-        .right{
-            width: 85%;
-            padding: 10px;
-        }
-    }
-
-    .blibliostar{
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        width: 100%;
-        .book{
-            margin: 10px;
-            width: 300px;
-            height: 400px;
-            text-align: center;
-            img{
-                height: 350px;
-                width: 250px;
-            }
-        }
-    }
-
-    .book{
-        justify-items: center;/* pour centrer la div a l'interieur*/
-        width: 100%;
-        .oneBook{
-            width: 90%;
-            height: fit-content;
-            background-color: #B3E9FF;
-            margin: 25px;
-            .title{
-                font-size: larger;
-                margin: 5px 10px;
-            }
-            .under{
-                display: flex;
-                flex-direction: row;
-                width: 100%;
-                img{
-                    width: 24%;
-                    height: fit-content;
-                    margin: 5px;
-                }
-                .right{
-                    width: 75%;
-                    padding: 5px;
-                    p{
-                        width: 100%;
-                        margin: 5px;
-                        height: fit-content;
-                        text-align: justify;
-                    }
-                }
-            }
-        }
-    }
-    
 
     /*------------------------------- Les formulaires --------------------------------*/
 
