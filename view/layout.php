@@ -23,33 +23,35 @@
                                 <img src="public/img/logo.png" alt="Logo" class="logo_header">
                                 <img src="public/img/logo_nom.png" alt="Sunstar">
                             </a>
-                            <a href="" ><i class="fa-solid fa-bars"></i> </a>
+                            <button class="burger" onclick="myFunction()"><i class="fa-solid fa-bars"></i></button>
                         </div>
-                        <div class="left_nav"> <!-- ceci est la future barre de recherche -->
-                            <div class="search">
-                                <p>Search...</p>
-                                <i class="fa-solid fa-magnifying-glass"></i>
+                        <div class="otherNav">
+                            <div class="left_nav"> <!-- ceci est la future barre de recherche -->
+                                <div class="search">
+                                    <p>Search...</p>
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                </div>
                             </div>
-                        </div>
-                        <div class="right_nav"> <!-- ici c'est soit les boutons se connecter/ s'inscrire soit le compte et le bouton se déconnecter -->
-                            <?php if(App\Session::isAdmin()){ ?>
-                                <a href="index.php?ctrl=home&action=users"><i class="fa-solid fa-users"></i></a>
-                            <?php } ?>
-                        <?php // si l'utilisateur est connecté 
-                            if(App\Session::getUser()){ ?>
-                                <a href="index.php?ctrl=forum&action=user_account"><span class="fas fa-user"></span></a>
-                                <div class="button_conexion_inscritption">
-                                    <a href="index.php?ctrl=security&action=logout">Déconnexion</a>
-                                </div>
-                                <?php
-                            }else{ ?>
-                                <div class="button_conexion_inscritption">
-                                    <a href="index.php?ctrl=security&action=login_form">Connexion</a>
-                                </div>
-                                <div class="button_conexion_inscritption">
-                                    <a href="index.php?ctrl=security&action=register">Inscription</a>
-                                </div>
-                            <?php } ?>
+                            <div class="right_nav"> <!-- ici c'est soit les boutons se connecter/ s'inscrire soit le compte et le bouton se déconnecter -->
+                                <?php if(App\Session::isAdmin()){ ?>
+                                    <a href="index.php?ctrl=home&action=users"><i class="fa-solid fa-users"></i></a>
+                                <?php } ?>
+                            <?php // si l'utilisateur est connecté 
+                                if(App\Session::getUser()){ ?>
+                                    <a href="index.php?ctrl=forum&action=user_account"><span class="fas fa-user"></span></a>
+                                    <div class="button_conexion_inscritption">
+                                        <a href="index.php?ctrl=security&action=logout">Déconnexion</a>
+                                    </div>
+                                    <?php
+                                }else{ ?>
+                                    <div class="button_conexion_inscritption">
+                                        <a href="index.php?ctrl=security&action=login_form">Connexion</a>
+                                    </div>
+                                    <div class="button_conexion_inscritption">
+                                        <a href="index.php?ctrl=security&action=register">Inscription</a>
+                                    </div>
+                                <?php } ?>
+                            </div>
                         </div>
                     </nav>
                 </header>
@@ -113,6 +115,6 @@
                 });
             })
         </script>
-        <script src="<?= PUBLIC_DIR ?>/js/script.js"></script>
+        <script src="<?= PUBLIC_DIR ?>js/script.js"></script> <!-- /!\ PUBLIC_DIR = public/-->
     </body>
 </html>
