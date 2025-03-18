@@ -33,7 +33,6 @@ L'objectif était de créer un forum avec une base de données sécurisée.
 ## 🎯 Objectifs Pédagogiques
 * Appliquer les concepts d'un modèle MVP.
 * Compréhension de la sémantique et l'utilisation d'un modèle MVP.
-* 
   
 ## 🛠️ A ajouter
 * Rendre la barre de recherche utilisable.
@@ -41,7 +40,8 @@ L'objectif était de créer un forum avec une base de données sécurisée.
 * Proposition d'abonnement de newsletter.
 * Ajout d'une connexion via Google.
   
-
+## 📥 Installation
+**Clonez ou télécharger ce repository** sur votre machine : https://github.com/Oarlina/forum.git
 
 ## 👤 Auteur
 Ce projet à été réalisé par Rachel Marquant.
