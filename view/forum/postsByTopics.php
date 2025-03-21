@@ -6,7 +6,7 @@
     if ($firstPost->getUser() == NULL) { 
         $pseudoFp = "Compte supprimé";
     } else {
-        $pseudoFp = $topic->getUser()->getPseudo();
+        $pseudoFp = $firstPost->getUser()->getPseudo();
     }
 ?>
 <p>

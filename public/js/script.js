@@ -10,4 +10,20 @@ function changeInput(nameInput){
         password_login.type = "password";
     }
 }
+// const burger = document.getElementsByClassName("burger");
 
+// je recupere la classe left_nav et right_nav je prend la premiere partie du tableau => pour accéder au style de la classe
+var x = document.getElementsByClassName("left_nav");
+var y = document.getElementsByClassName("right_nav");
+x = x[0];
+y = y[0];
+
+function  myFunction() { // me change les classes en display block à display none  et inversement
+    if (x.style.display == "flex" || x.style.display == "") {
+        x.style.display = "none";
+        y.style.display = "none";
+    } else {
+        x.style.display = "flex";
+        y.style.display = "flex";
+    }
+}

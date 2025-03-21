@@ -23,40 +23,35 @@
                                 <img src="public/img/logo.png" alt="Logo" class="logo_header">
                                 <img src="public/img/logo_nom.png" alt="Sunstar">
                             </a>
+                            <button class="burger" onclick="myFunction()"><i class="fa-solid fa-bars"></i></button>
                         </div>
-                        <div class="left_nav"> <!-- ceci est la future barre de recherche -->
-                            <div class="search">
-                                <p>Search...</p>
-                                <i class="fa-solid fa-magnifying-glass"></i>
+                        <div class="otherNav">
+                            <div class="left_nav"> <!-- ceci est la future barre de recherche -->
+                                <div class="search">
+                                    <p>Search...</p>
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                </div>
                             </div>
-                            <?php
-                            if(App\Session::isAdmin()){
-                                ?>
-                                <a href="index.php?ctrl=home&action=users">Voir la liste des gens</a>
-                            <?php } ?>
-                        </div>
-                        <div class="right_nav"> <!-- ici c'est soit les boutons se connecter/ s'inscrire soit le compte et le bouton se déconnecter -->
-                        <?php
-                            // si l'utilisateur est connecté 
-                            if(App\Session::getUser()){
-                                ?>
-                                <a href="index.php?ctrl=forum&action=user_account"><span class="fas fa-user"></span>&nbsp;<?= App\Session::getUser()?></a>
-                                <div class="button_conexion_inscritption">
-                                    <a href="index.php?ctrl=security&action=logout">Déconnexion</a>
-                                </div>
-                                <?php
-                            }
-                            else{
-                                ?>
-                                <div class="button_conexion_inscritption">
-                                    <a href="index.php?ctrl=security&action=login_form">Connexion</a>
-                                </div>
-                                <div class="button_conexion_inscritption">
-                                    <a href="index.php?ctrl=security&action=register">Inscription</a>
-                                </div>
-                            <?php
-                            }
-                        ?>
+                            <div class="right_nav"> <!-- ici c'est soit les boutons se connecter/ s'inscrire soit le compte et le bouton se déconnecter -->
+                                <?php if(App\Session::isAdmin()){ ?>
+                                    <a href="index.php?ctrl=home&action=users"><i class="fa-solid fa-users"></i></a>
+                                <?php } ?>
+                            <?php // si l'utilisateur est connecté 
+                                if(App\Session::getUser()){ ?>
+                                    <a href="index.php?ctrl=forum&action=user_account"><span class="fas fa-user"></span></a>
+                                    <div class="button_conexion_inscritption">
+                                        <a href="index.php?ctrl=security&action=logout">Déconnexion</a>
+                                    </div>
+                                    <?php
+                                }else{ ?>
+                                    <div class="button_conexion_inscritption">
+                                        <a href="index.php?ctrl=security&action=login_form">Connexion</a>
+                                    </div>
+                                    <div class="button_conexion_inscritption">
+                                        <a href="index.php?ctrl=security&action=register">Inscription</a>
+                                    </div>
+                                <?php } ?>
+                            </div>
                         </div>
                     </nav>
                 </header>
@@ -64,32 +59,34 @@
                 <main id="forum">
                     <?= $page ?>
                 </main>
+                
+                <footer>
+                    <section class="top_footer"> <!-- les mentions légales -->
+                        <a href="index.php?ctrl=forum&action=politiqueConfidentialite">Politique de confidentialité</a>
+                        <a href="index.php?ctrl=forum&action=cookies">Cookies</a>
+                        <a href="index.php?ctrl=forum&action=nous_soutenir">Nous soutenir</a>
+                        <a href="index.php?ctrl=forum&action=contact">Contact</a>
+                    </section>
+                    <hr class="ligne_footer">
+                    <section class="bottom_footer"> <!-- la partie ou se trouve les reseaux sociaux + le peid de page qui dit l'année de creation du site -->
+                        <p>Suivez-nous </p>
+                        <div class="reseaux">
+                            <a href="https://www.instagram.com/" target="_blank"><i class=" fa-brands fa-instagram"></i></a>
+                            <a href="https://www.facebook.com/" target="_blank"><i class=" fa-brands fa-facebook-f"></i></a>
+                            <a href="https://www.x.com/" target="_blank"><i class=" fa-brands fa-x-twitter"></i></a>
+                            <a href="https://www.snapchat.com/" target="_blank"><i class=" fa-brands fa-snapchat"></i></a>
+                        </div>
+                        <small>&copy; <?= date_create("now")->format("Y") ?> - Sunstar</small>
+                    </section>
+                </footer>
             </div>
 
-            <footer>
-                <section class="top_footer"> <!-- les mentions légales -->
-                    <a href="#">Politique de confidentialité</a>
-                    <a href="#">Cookies</a>
-                    <a href="#">Nous soutenir</a>
-                    <a href="#">Contact</a>
-                </section>
-                <hr class="ligne_footer">
-                <section class="bottom_footer"> <!-- la partie ou se trouve les reseaux sociaux + le peid de page qui dit l'année de creation du site -->
-                    <p>Suivez-nous </p>
-                    <div class="reseaux">
-                        <a href="https://www.instagram.com/" target="_blank"><i class=" fa-brands fa-instagram"></i></a>
-                        <a href="https://www.facebook.com/" target="_blank"><i class=" fa-brands fa-facebook-f"></i></a>
-                        <a href="https://www.x.com/" target="_blank"><i class=" fa-brands fa-x-twitter"></i></a>
-                        <a href="https://www.snapchat.com/" target="_blank"><i class=" fa-brands fa-snapchat"></i></a>
-                    </div>
-                    <small>&copy; <?= date_create("now")->format("Y") ?> - Sunstar</small>
-                </section>
-            </footer>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/@tinymce/tinymce-webcomponent@2/dist/tinymce-webcomponent.min.js"></script>
-        <!-- <tinymce-editor
+        <tinymce-editor
             api-key="ed2izf8mohn8kxt7o5d48jnx6s2y8sm70a3lsdewayu1fgjl">
-        </tinymce-editor> -->
+        </tinymce-editor>
+        
         <script>
             $(document).ready(function(){
                 $(".message").each(function(){
@@ -118,6 +115,6 @@
                 });
             })
         </script>
-        <script src="<?= PUBLIC_DIR ?>/js/script.js"></script>
+        <script src="<?= PUBLIC_DIR ?>js/script.js"></script> <!-- /!\ PUBLIC_DIR = public/-->
     </body>
 </html>
