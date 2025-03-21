@@ -14,9 +14,11 @@
         </div>
     </div>
     <div class="community">
-        <h3>Communauté</h3>
-        <p>Accédez ici à la communauté du forum et restez informé sur tous les évènements à venir.</p>
-    </div>
+        <a href="index.php?ctrl=forum&action=community">
+            <h3>Communauté</h3>
+            <p>Accédez ici à la communauté du forum et restez informé sur tous les évènements à venir.</p>
+        </a>
+        </div>
     <div class="right_box">
         <div class="blibliostar">
             <a href="index.php?ctrl=forum&action=blibliostar">

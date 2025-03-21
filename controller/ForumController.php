@@ -14,7 +14,7 @@ use Model\Managers\CategoryBookManager;
 
 class ForumController extends AbstractController implements ControllerInterface{
 
-    // ****************************************************************************** / Page des principales ******************************************************************************
+    // ****************************************************************************** / Page principales ******************************************************************************
 
     // il affiche les topics DE TOUTE les catégorie
     public function index() {
@@ -65,7 +65,30 @@ class ForumController extends AbstractController implements ControllerInterface{
             ]
         ];
     }
+    public function community(){
+        // créer une nouvelle instance de CategoryManager
+        $categoryManager = new CategoryManager();
+        // récupérer la liste de toutes les catégories grâce à la méthode findAll de Manager.php (triés par nom)
+        $category = $categoryManager->findOneByName("Présentation");;
+        // le controller communique avec la vue "listCategories" (view) pour lui envoyer la liste des catégories (data)
+        $topicsManager = new TopicManager();
+        $topics = $topicsManager->findTopicsByCategory($category->getId()); // je recupere les topics qui sont lier a un livre car j'ai des topic du faq et tutos qui ne sont pas lier a un livre
 
+        $userManager = new userManager();
+        $users = $userManager->findAll();
+
+        // $postManager = new postManager;
+        // $posts = $postManager->topicManager($topic->getId());
+        return [
+            "view" => VIEW_DIR."forum/community.php",
+            "meta_description" => "Liste des catégories du forum",
+            "data" => [
+                "category" => $category,
+                "topics" => $topics,
+                "users" => $users
+            ]
+        ];
+    }
 
 
     // ****************************************************************************** / Page des principales ******************************************************************************

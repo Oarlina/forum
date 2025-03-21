@@ -8,7 +8,9 @@
             <select name="book" id=""  class="in">
                 <option value="default">Choissisiez le livre du post :</option>
                 <?php foreach( $books as $book){ ?>
-                        <option name="book_id" value="<?= $book->getBook()->getId() ?>"> <?= $book->getBook()->getTitle()," - ", $book->getBook()->getAuthor() ?> </option>
+                        <option name="book_id" value="<?= $book->getBook()->getId() ?>">
+                             <?= $book->getBook()->getTitle()," - ", $book->getBook()->getAuthor() ?> 
+                        </option>
                 <?php } ?>
             </select>
             <?php }else { ?>

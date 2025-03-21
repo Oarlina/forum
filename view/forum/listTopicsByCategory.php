@@ -10,7 +10,7 @@
     <h1>Topics pour <?= $category?> :</h1>
     <?php if(App\Session::getUser()){ ?>
         <a href="index.php?ctrl=forum&action=topicForm&id=<?= $category->getId()?>"><button><b>Ajouter un topic dans <?= $category ?> </b></button></a>
-    <?php } ?>
+    <?php } ?> 
     <?php
     foreach($topics as $topic ){  
         if ($topic->getUser() == NULL) { 

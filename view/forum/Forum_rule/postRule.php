@@ -3,7 +3,13 @@
     $topic = $result['data']['topic'];
 ?>
 <p>
-    <a href="index.php" class="oldpath"> Acceuil</a>  >  <a href="index.php?ctrl=forum&action=Forum_rule" class="oldpath">Forum</a> > <a href="index.php?ctrl=forum&action=<?= $topic->getCategory()->getTypeCategory()?>" class="oldpath"> <?= $topic->getCategory()->getTypeCategory()?></a>
+    <a href="index.php" class="oldpath"> Acceuil</a>  >  
+    <?php if($topic->getCategory()->getId() == 14){?>
+        <a href="index.php?ctrl=forum&action=community" class="oldpath">Communauté</a> > 
+    <?php }else { ?>
+        <a href="index.php?ctrl=forum&action=Forum_rule" class="oldpath">Forum</a> > 
+    <?php } ?>
+    <a href="index.php?ctrl=forum&action=<?= $topic->getCategory()->getTypeCategory()?>"> <?= $topic->getCategory()->getTypeCategory()?></a>
 </p>
 <h1 class="title"><?=$topic->getTitle()?></h1>
 

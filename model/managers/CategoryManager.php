@@ -17,7 +17,7 @@ class CategoryManager extends Manager{
     // récupérer tous les topics d'une catégorie spécifique (par son id)
     public function findCategory() {
 
-        $sql = "SELECT * FROM ".$this->tableName." t where typeCategory != 'FAQ' && typeCategory !='Tutos'";
+        $sql = "SELECT * FROM ".$this->tableName." t where typeCategory != 'FAQ' && typeCategory !='Tutos' && typeCategory !='Présentation'";
        
         // la requête renvoie plusieurs enregistrements --> getMultipleResults
         return  $this->getMultipleResults(
