@@ -9,6 +9,21 @@
         $pseudoFp = $firstPost->getUser()->getPseudo();
     }
 ?>
+<?php 
+    if ($topic->getCategory()->getId() == 12 || $topic->getCategory()->getId() == 13 ) {
+        ?>
+<p>
+    <a href="index.php" class="oldpath"> Acceuil</a>  >  <a href="index.php?ctrl=forum&action=Forum_rule" class="oldpath">Règlement</a> > <?= $topic->getTitle()?>
+</p>
+<?php 
+    }else if ($topic->getCategory()->getId() == 14) {
+?>
+<p>
+    <a href="index.php" class="oldpath"> Acceuil</a>  >  <a href="index.php?ctrl=forum&action=community" class="oldpath">Communauté</a> > <?= $topic->getTitle()?>
+</p>
+<?php 
+    } else {
+        ?>
 <p>
     <a href="index.php" class="oldpath"> Acceuil</a>  >  <a href="index.php?ctrl=forum&action=index" class="oldpath">Lecture</a> > <?= $topic->getTitle()?>
 </p>
@@ -28,7 +43,9 @@
         </div>
     </div>
 </section>
-
+<?php 
+    } 
+?>
 <section class="firstPost">
 <h1><?= $firstPost->getTextPost()?></h1>
         <p><u>Createur du post :</u> <?=$pseudoFp?></p>

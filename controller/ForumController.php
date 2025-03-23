@@ -58,7 +58,7 @@ class ForumController extends AbstractController implements ControllerInterface{
         $user = $userManager->findOneById($id);
 
         return [
-            "view" => VIEW_DIR."account/user_account.php",
+            "view" => VIEW_DIR."security/user_account.php",
             "meta_description" => "Compte : ",
             "data" => [
                 "user" => $user

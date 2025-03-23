@@ -32,8 +32,27 @@ body{
     a:hover{
         color: #3700ff;
     }
+    #scrollToTopBtn {
+        position: sticky;
+        bottom: 30px;
+        right: 30px;
+        width: 50px;
+        float: right; /* pour que l'élément se colle sur la droite*/
+        height: 50px;
+        color: red;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: none;
+        /* centre verticalement et horizontalement  */
+        justify-content: center;
+        align-items: center;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
     #forum{
         margin: 10px;
+        /* représente le bouton qui permet de remonter en haut de la page  */
+        position: relative;
         .title{
             text-align: center;
         }
@@ -584,6 +603,21 @@ body{
             }
         }
         #forum{
+            .home_box{
+                flex-direction: column;
+                height: fit-content;
+                .left_box, .community, .right_box{
+                    width: 100%;
+                    margin: 0;
+                }
+                /* .forum, .community, .account, .blibliostar, .reading{
+                    margin: 0;
+                a{
+                    width: 100%;
+                    height: 30%;
+                    overflow: auto;
+                } */
+            }
             /* c'est la page d'un utilisateur */
             .user_account{
                 flex-direction: column;
@@ -610,6 +644,13 @@ body{
                             width: 30%;
                         }
                     }
+                }
+            }
+            .charte{
+                flex-direction: column;
+                .left, .right{
+                    width: 100%;
+                    text-align: justify;
                 }
             }
         }

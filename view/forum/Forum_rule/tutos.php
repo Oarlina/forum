@@ -12,7 +12,7 @@
     <?php }
 
     if ($topics == null){
-        ?> <p>Aucun topic existant</p> <?php
+        ?> <p>Aucun topic existant cc</p> <?php
     }else {
         foreach ($topics as $topic){
             ?> <p><a href="index.php?ctrl=forum&action=postsByTopicsRule&id=<?= $topic->getId() ?>"><?= $topic->getTitle() ?> </a></p>  <?php // j'affiche le topic de tuto

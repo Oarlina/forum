@@ -60,6 +60,8 @@
                     <?= $page ?>
                 </main>
                 
+                <button id="scrollToTopBtn"> &#8593;</button> <!-- je creer un bouton pour remonter toute la page-->
+
                 <footer>
                     <section class="top_footer"> <!-- les mentions légales -->
                         <a href="index.php?ctrl=forum&action=politiqueConfidentialite">Politique de confidentialité</a>

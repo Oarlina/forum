@@ -27,3 +27,23 @@ function  myFunction() { // me change les classes en display block à display no
         y.style.display = "flex";
     }
 }
+
+// ajout d'un bouton qui fait remonter tout en haut de la page 
+const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+
+window.onscroll = function (){
+    if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50)
+    {
+        scrollToTopBtn.style.display = "flex";
+    } else 
+    {
+        scrollToTopBtn.style.display = "none";
+    }
+};
+
+scrollToTopBtn.addEventListener('click',function(){
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+});
