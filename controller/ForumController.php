@@ -89,6 +89,33 @@ class ForumController extends AbstractController implements ControllerInterface{
             ]
         ];
     }
+    public function politiqueConfidentialite(){
+        return [
+            "view" => VIEW_DIR."forum/footer/politique_de_confidentialite.php",
+            "meta_description" => "politique de confidentialite",
+            "data" => [
+            ]
+        ];
+    }
+    public function cookies(){
+        return [
+            "view" => VIEW_DIR."forum/footer/cookies.php",
+            "meta_description" => "Cookies",
+            "data" => [
+            ]
+        ];
+    }
+    public function nous_soutenir(){
+        return [
+            "view" => VIEW_DIR."forum/footer/nous_soutenir.php",
+            "meta_description" => "Liste des catégories du forum",
+            "data" => [
+            ]
+        ];
+    }
+    public function contact(){
+        $this->redirectTo("forum", "postsByTopicsRule", 40);
+    }
 
 
     // ****************************************************************************** / Page des principales ******************************************************************************

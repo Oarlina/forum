@@ -21,7 +21,7 @@
     <?php 
     if ($posts != null){ 
     foreach($posts as $post){
-        if ($post->getUser()->getPseudo() == "Compte supprimé") { 
+        if ($post->getUser() == "Compte supprimé") { 
             $pseudo = "Compte supprimé";
         } else {
             $pseudo = $post->getUser()->getPseudo();
